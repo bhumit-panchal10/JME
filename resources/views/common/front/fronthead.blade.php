@@ -1,5 +1,5 @@
 <head>
-
+    @yield('opTag')
     <!-- =========================
          BASIC META
     ========================== -->
@@ -8,20 +8,19 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Jay Mahakal Enterprise Group - Engineering, Procurement and Construction Solutions">
+    {{-- <meta name="description" content="Jay Mahakal Enterprise Group - Engineering, Procurement and Construction Solutions">
 
     <meta name="keywords"
-        content="JME Group, Jay Mahakal Enterprise Group, Engineering, EPC, Piping, Electrical, Fire Protection, Passive Network">
+        content="JME Group, Jay Mahakal Enterprise Group, Engineering, EPC, Piping, Electrical, Fire Protection, Passive Network"> --}}
 
     <meta name="author" content="Jay Mahakal Enterprise Group">
-
 
     <!-- =========================
          TITLE
     ========================== -->
 
     <title>
-        Jay Mahakal Enterprise Group | JME Group
+        @yield('title')
     </title>
 
 
@@ -37,5 +36,5 @@
     ========================== -->
 
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
-
+    @yield('head')
 </head>

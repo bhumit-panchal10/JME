@@ -1,7 +1,25 @@
 @extends('layouts.front')
-@section('title', 'About Us')
-@section('content')
+@section('title', config('app.name') . '' . ($meta->metaTitle ?? ''))
+@section('opTag')
+    {{-- Meta tags --}}
+    <meta name="description" content="{{ $meta->metaDescription ?? '' }}">
+    <meta name="keywords" content="{{ $meta->metaKeyword ?? '' }}">
+    <meta name="title" content="{{ $meta->metaTitle ?? '' }}">
+@endsection
 
+@section('head')
+    {!! $meta->head ?? '' !!}
+@endsection
+
+
+@section('body')
+    @if (!empty($meta->body))
+        <script type="text/javascript">
+            {!! $meta->body !!}
+        </script>
+    @endif
+@endsection
+@section('content')
     <section class="jme-inner-hero">
 
         <!-- Dark overlay -->
@@ -11,8 +29,8 @@
             <div class="jme-inner-content">
 
                 <!-- =========================
-                                         WHITE CONTENT CARD
-                                    ========================== -->
+                                                 WHITE CONTENT CARD
+                                            ========================== -->
                 <div class="jme-inner-card">
 
                     <div class="jme-card-tag">
@@ -82,8 +100,8 @@
 
 
         <!-- =========================
-                                 BOTTOM NAVY STRIP
-                            ========================== -->
+                                         BOTTOM NAVY STRIP
+                                    ========================== -->
         <div class="jme-bottom-strip">
 
             <span class="bottom-green-shape"></span>
@@ -104,8 +122,8 @@
 
 
         <!-- =====================================================
-                         ABOUT JME - ENGINEERING CROSS SECTION
-                    ====================================================== -->
+                                 ABOUT JME - ENGINEERING CROSS SECTION
+                            ====================================================== -->
 
         <section class="jme-about-x" id="jmeAboutX">
 
@@ -114,8 +132,8 @@
                 <div class="about-x-shell">
 
                     <!-- =============================================
-                                     IMAGE ZONE
-                                ============================================== -->
+                                             IMAGE ZONE
+                                        ============================================== -->
 
                     <div class="about-x-visual">
 
@@ -141,8 +159,8 @@
 
 
                     <!-- =============================================
-                                     CONTENT
-                                ============================================== -->
+                                             CONTENT
+                                        ============================================== -->
 
                     <div class="about-x-content">
 
@@ -179,8 +197,8 @@
 
 
                         <!-- =========================================
-                                         ENGINEERING RAIL
-                                    ========================================== -->
+                                                 ENGINEERING RAIL
+                                            ========================================== -->
 
 
                         <div class="about-x-rail">
@@ -206,7 +224,7 @@
 
                         </div>
 
-                    
+
 
                     </div>
 
@@ -219,16 +237,16 @@
 
 
         <!-- =========================================
-                         VISION & MISSION
-                    ========================================== -->
+                                 VISION & MISSION
+                            ========================================== -->
         <section class="about-profile-vm">
             <div class="container">
 
                 <div class="about-profile-vm-grid">
 
                     <!-- =========================
-                                     VISION
-                                ========================== -->
+                                             VISION
+                                        ========================== -->
                     <article class="about-profile-vm-card about-profile-vision">
 
                         <div class="about-profile-vm-top">
@@ -291,8 +309,8 @@
 
 
                     <!-- =========================
-                                     MISSION
-                                ========================== -->
+                                             MISSION
+                                        ========================== -->
                     <article class="about-profile-vm-card about-profile-mission">
 
                         <div class="about-profile-vm-top">
@@ -364,8 +382,8 @@
 
 
         <!-- =========================================
-                         WHY CHOOSE US - NEW DESIGN
-                    ========================================== -->
+                                 WHY CHOOSE US - NEW DESIGN
+                            ========================================== -->
         <section class="about-strength-section">
             <div class="container">
 
@@ -618,8 +636,6 @@
             </div>
         </section>
     </main>
-
-
 @endsection
 @section('scripts')
 @endsection

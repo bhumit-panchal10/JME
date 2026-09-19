@@ -1,7 +1,26 @@
 @extends('layouts.front')
-@section('title', 'Video Gallery')
+@section('title', config('app.name') . '' . ($meta->metaTitle ?? ''))
+@section('opTag')
+    {{-- Meta tags --}}
+    <meta name="description" content="{{ $meta->metaDescription ?? '' }}">
+    <meta name="keywords" content="{{ $meta->metaKeyword ?? '' }}">
+    <meta name="title" content="{{ $meta->metaTitle ?? '' }}">
+@endsection
+
+@section('head')
+    {!! $meta->head ?? '' !!}
+@endsection
+
+@section('body')
+    @if (!empty($meta->body))
+        <script type="text/javascript">
+            {!! $meta->body !!}
+        </script>
+    @endif
+@endsection
+
 @section('content')
-<style>
+    <style>
         .jme-blog-pagination-wrap {
             width: 100%;
             margin-top: 40px;
@@ -93,8 +112,8 @@
             <div class="jme-inner-content">
 
                 <!-- =========================
-                                     WHITE CONTENT CARD
-                                ========================== -->
+                                         WHITE CONTENT CARD
+                                    ========================== -->
                 <div class="jme-inner-card">
 
                     <div class="jme-card-tag">
@@ -164,8 +183,8 @@
 
 
         <!-- =========================
-                             BOTTOM NAVY STRIP
-                        ========================== -->
+                                 BOTTOM NAVY STRIP
+                            ========================== -->
         <div class="jme-bottom-strip">
 
             <span class="bottom-green-shape"></span>
@@ -185,8 +204,8 @@
 
 
     <!-- =====================================================
-                         SIMPLE YOUTUBE VIDEO GALLERY
-                    ====================================================== -->
+                             SIMPLE YOUTUBE VIDEO GALLERY
+                        ====================================================== -->
 
     <section class="jme-simple-video-gallery">
 
@@ -227,75 +246,75 @@
                     @endforeach
 
                 </div>
-                
-                 @if ($video_gallery->hasPages())
 
-                <div class="jme-blog-pagination-wrap">
+                @if ($video_gallery->hasPages())
 
-                    <div class="jme-blog-pagination">
+                    <div class="jme-blog-pagination-wrap">
 
-                        {{-- PREVIOUS --}}
-                        @if ($video_gallery->onFirstPage())
-                            <button type="button" class="jme-pagination-control" disabled>
+                        <div class="jme-blog-pagination">
 
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M19 12H5"></path>
-                                    <path d="M11 18l-6-6 6-6"></path>
-                                </svg>
+                            {{-- PREVIOUS --}}
+                            @if ($video_gallery->onFirstPage())
+                                <button type="button" class="jme-pagination-control" disabled>
 
-                            </button>
-                        @else
-                            <a href="{{ $video_gallery->previousPageUrl() }}" class="jme-pagination-control">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M19 12H5"></path>
+                                        <path d="M11 18l-6-6 6-6"></path>
+                                    </svg>
 
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M19 12H5"></path>
-                                    <path d="M11 18l-6-6 6-6"></path>
-                                </svg>
+                                </button>
+                            @else
+                                <a href="{{ $video_gallery->previousPageUrl() }}" class="jme-pagination-control">
 
-                            </a>
-                        @endif
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M19 12H5"></path>
+                                        <path d="M11 18l-6-6 6-6"></path>
+                                    </svg>
 
-
-                        {{-- PAGE NUMBERS --}}
-                        <div class="jme-pagination-numbers">
-
-                            @foreach ($video_gallery->getUrlRange(1, $video_gallery->lastPage()) as $page => $url)
-                                <a href="{{ $url }}"
-                                    class="jme-pagination-page
-                        {{ $page == $video_gallery->currentPage() ? 'active' : '' }}">
-                                    {{ $page }}
                                 </a>
-                            @endforeach
+                            @endif
+
+
+                            {{-- PAGE NUMBERS --}}
+                            <div class="jme-pagination-numbers">
+
+                                @foreach ($video_gallery->getUrlRange(1, $video_gallery->lastPage()) as $page => $url)
+                                    <a href="{{ $url }}"
+                                        class="jme-pagination-page
+                        {{ $page == $video_gallery->currentPage() ? 'active' : '' }}">
+                                        {{ $page }}
+                                    </a>
+                                @endforeach
+
+                            </div>
+
+
+                            {{-- NEXT --}}
+                            @if ($video_gallery->hasMorePages())
+                                <a href="{{ $video_gallery->nextPageUrl() }}" class="jme-pagination-control">
+
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M13 6l6 6-6 6"></path>
+                                    </svg>
+
+                                </a>
+                            @else
+                                <button type="button" class="jme-pagination-control" disabled>
+
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M13 6l6 6-6 6"></path>
+                                    </svg>
+
+                                </button>
+                            @endif
 
                         </div>
 
-
-                        {{-- NEXT --}}
-                        @if ($video_gallery->hasMorePages())
-                            <a href="{{ $video_gallery->nextPageUrl() }}" class="jme-pagination-control">
-
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M5 12h14"></path>
-                                    <path d="M13 6l6 6-6 6"></path>
-                                </svg>
-
-                            </a>
-                        @else
-                            <button type="button" class="jme-pagination-control" disabled>
-
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M5 12h14"></path>
-                                    <path d="M13 6l6 6-6 6"></path>
-                                </svg>
-
-                            </button>
-                        @endif
-
                     </div>
 
-                </div>
-
-            @endif
+                @endif
 
             @endif
 

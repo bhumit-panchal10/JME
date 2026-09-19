@@ -218,6 +218,10 @@
                                                             class="btn btn-sm btn-primary editCategoryBtn" title="Edit"
                                                             data-id="{{ $category->id }}"
                                                             data-name="{{ $category->name }}"
+                                                            data-metatitle="{{ $category->meta_title }}"
+                                                            data-head="{{ $category->head }}"
+                                                            data-body="{{ $category->body }}"
+                                                            data-metadescription="{{ $category->meta_description }}"
                                                             data-description="{{ $category->sort_desicription }}"
                                                             data-image="{{ $category->image }}">
                                                             <i class="fas fa-edit"></i>
@@ -280,7 +284,7 @@
     <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel"
         aria-hidden="true">
 
-        <div class="modal-dialog">
+        <div class="modal-dialog" style="max-width: 700px;">
 
             <div class="modal-content">
 
@@ -298,79 +302,140 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
                     </div>
-
-
                     <div class="modal-body">
 
                         {{-- Category Name --}}
-                        <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6">
 
-                            <label class="form-label">
-                                Category Name
-                                <span style="color:red;">*</span>
-                            </label>
+                                <label class="form-label">
+                                    Category Name
+                                    <span style="color:red;">*</span>
+                                </label>
 
-                            <input type="text" name="name" id="edit_name" class="form-control">
+                                <input type="text" name="name" id="edit_name" class="form-control">
 
-                            @if ($errors->has('name'))
-                                <span class="text-danger">
-                                    {{ $errors->first('name') }}
-                                </span>
-                            @endif
+                                @if ($errors->has('name'))
+                                    <span class="text-danger">
+                                        {{ $errors->first('name') }}
+                                    </span>
+                                @endif
 
-                        </div>
+                            </div>
 
+                            {{-- New Image --}}
+                            <div class="col-md-6">
 
-                        {{-- Current Image --}}
-                        <div class="mb-3" id="currentImageBox" style="display:none;">
+                                <label class="form-label">
+                                    Change Image
+                                </label>
 
-                            <label class="form-label">
-                                Current Image
-                            </label>
+                                <input type="file" name="image" id="edit_image" class="form-control"
+                                    accept="image/*">
 
-                            <br>
+                                @if ($errors->has('image'))
+                                    <span class="text-danger">
+                                        {{ $errors->first('image') }}
+                                    </span>
+                                @endif
 
-                            <img src="" id="currentImage" alt="Category Image"
-                                style="
+                            </div>
+                            {{-- Current Image --}}
+                            <div class="col-md-6" id="currentImageBox" style="display:none;">
+
+                                <label class="form-label">
+                                    Current Image
+                                </label>
+
+                                <br>
+
+                                <img src="" id="currentImage" alt="Category Image"
+                                    style="
                                 width:80px;
                                 height:80px;
                                 object-fit:cover;
                                 border-radius:5px;
                             ">
 
-                        </div>
-
-
-                        {{-- New Image --}}
-                        <div class="mb-3">
-
-                            <label class="form-label">
-                                Change Image
-                            </label>
-
-                            <input type="file" name="image" id="edit_image" class="form-control" accept="image/*">
-
-                            @if ($errors->has('image'))
-                                <span class="text-danger">
-                                    {{ $errors->first('image') }}
-                                </span>
-                            @endif
+                            </div>
 
                         </div>
 
 
                         {{-- Description --}}
-                        <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    Short Description
+                                </label>
+
+                                <textarea name="sort_desicription" id="edit_sort_desicription" class="form-control" rows="4"></textarea>
+
+                                @if ($errors->has('sort_desicription'))
+                                    <span class="text-danger">
+                                        {{ $errors->first('sort_desicription') }}
+                                    </span>
+                                @endif
+
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">
+                                    Meta Title
+                                </label>
+                                <input type="text" id="meta_tittle" name="meta_tittle" class="form-control"
+                                    value="{{ old('meta_tittle', isset($service) ? $service->meta_tittle : '') }}"
+                                    placeholder="Enter meta title">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <label class="form-label">
+                                    Meta Description
+                                </label>
+
+                                <textarea id="meta_description" name="meta_description" class="form-control" rows="3"
+                                    placeholder="Enter meta description">{{ old('meta_description', isset($service) ? $service->meta_description : '') }}</textarea>
+                                @if ($errors->has('meta_description'))
+                                    <span class="text-danger">
+
+                                        {{ $errors->first('meta_description') }}
+
+                                    </span>
+                                @endif
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <label class="form-label">
+                                    Head
+                                </label>
+
+
+                                <textarea id="head" name="head" class="form-control" rows="4" placeholder="Enter head content">{{ old('head', isset($service) ? $service->head : '') }}</textarea>
+                                @if ($errors->has('head'))
+                                    <span class="text-danger">
+
+                                        {{ $errors->first('head') }}
+
+                                    </span>
+                                @endif
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-4">
 
                             <label class="form-label">
-                                Short Description
+                                Body
                             </label>
-
-                            <textarea name="sort_desicription" id="edit_sort_desicription" class="form-control" rows="4"></textarea>
-
-                            @if ($errors->has('sort_desicription'))
+                            <textarea id="body" name="body" class="form-control" rows="10" placeholder="Enter body content">{{ old('body', isset($service) ? $service->body : '') }}</textarea>
+                            @if ($errors->has('body'))
                                 <span class="text-danger">
-                                    {{ $errors->first('sort_desicription') }}
+
+                                    {{ $errors->first('body') }}
+
                                 </span>
                             @endif
 
@@ -443,13 +508,20 @@
             // Edit Category Modal
             // ============================================================
             $('.editCategoryBtn').on('click', function() {
-
                 let id = $(this).data('id');
                 let name = $(this).data('name');
+                let metatitle = $(this).data('metatitle');
+                let head = $(this).data('head');
+                let body = $(this).data('body');
+                let metadescription = $(this).data('metadescription');
                 let description = $(this).data('description');
                 let image = $(this).data('image');
 
                 $('#edit_name').val(name);
+                $('#meta_tittle').val(metatitle);
+                $('#meta_description').val(metadescription);
+                $('#head').val(head);
+                $('#body').val(body);
 
                 $('#edit_sort_desicription').val(description);
 

@@ -1,9 +1,28 @@
 @extends('layouts.front')
-@section('title', 'Home')
+@section('title', config('app.name') . '' . ($meta->metaTitle ?? ''))
+@section('opTag')
+    {{-- Meta tags --}}
+    <meta name="description" content="{{ $meta->metaDescription ?? '' }}">
+    <meta name="keywords" content="{{ $meta->metaKeyword ?? '' }}">
+    <meta name="title" content="{{ $meta->metaTitle ?? '' }}">
+@endsection
+
+@section('head')
+    {!! $meta->head ?? '' !!}
+@endsection
+
+
+@section('body')
+    @if (!empty($meta->body))
+        <script type="text/javascript">
+            {!! $meta->body !!}
+        </script>
+    @endif
+@endsection
 @section('content')
     <!-- =====================================================
-                                                                                                                                                                                         JME HERO SLIDER
-                                                                                                                                                                                    ====================================================== -->
+                                                                                                                                                                                                 JME HERO SLIDER
+                                                                                                                                                                                            ====================================================== -->
 
     <section class="jme-hero" id="jmeHero">
 
@@ -13,8 +32,8 @@
 
 
             <!-- =============================================
-                                                                                                                                                                                                 SLIDE 01
-                                                                                                                                                                                            ============================================== -->
+                                                                                                                                                                                                         SLIDE 01
+                                                                                                                                                                                                    ============================================== -->
 
             <div class="hero-slide active">
 
@@ -55,7 +74,7 @@
 
                         <div class="hero-actions">
 
-                            <a href="{{ route('service','turnkey-epc-project-solutions') }}" class="jme-btn">
+                            <a href="{{ route('service', 'turnkey-epc-project-solutions') }}" class="jme-btn">
 
                                 <span class="jme-btn-text">
                                     Explore Services
@@ -73,7 +92,7 @@
                             </a>
 
 
-                            <a href="{{route('contactus')}}" class="hero-text-link">
+                            <a href="{{ route('contactus') }}" class="hero-text-link">
 
                                 Discuss Your Project
 
@@ -94,8 +113,8 @@
 
 
             <!-- =============================================
-                                                                                                                                                                                                 SLIDE 02
-                                                                                                                                                                                            ============================================== -->
+                                                                                                                                                                                                         SLIDE 02
+                                                                                                                                                                                                    ============================================== -->
 
             <div class="hero-slide">
 
@@ -136,7 +155,7 @@
 
                         <div class="hero-actions">
 
-                            <a href="{{ route('service','fire-protection-safety-solutions') }}" class="jme-btn">
+                            <a href="{{ route('service', 'fire-protection-safety-solutions') }}" class="jme-btn">
 
                                 <span class="jme-btn-text">
                                     Fire Solutions
@@ -154,7 +173,7 @@
                             </a>
 
 
-                            <a href="{{route('contactus')}}" class="hero-text-link">
+                            <a href="{{ route('contactus') }}" class="hero-text-link">
 
                                 Talk to Our Team
 
@@ -175,8 +194,8 @@
 
 
             <!-- =============================================
-                                                                                                                                                                                                 SLIDE 03
-                                                                                                                                                                                            ============================================== -->
+                                                                                                                                                                                                         SLIDE 03
+                                                                                                                                                                                                    ============================================== -->
 
             <div class="hero-slide">
 
@@ -217,7 +236,7 @@
 
                         <div class="hero-actions">
 
-                            <a href="{{ route('service','data-passive-network-solutions') }}" class="jme-btn">
+                            <a href="{{ route('service', 'data-passive-network-solutions') }}" class="jme-btn">
 
                                 <span class="jme-btn-text">
                                     Network Solutions
@@ -235,7 +254,7 @@
                             </a>
 
 
-                            <a href="{{route('photogallery')}}" class="hero-text-link">
+                            <a href="{{ route('photogallery') }}" class="hero-text-link">
 
                                 View Projects
 
@@ -258,8 +277,8 @@
 
 
         <!-- =================================================
-                                                                                                                                                                                             SLIDER CONTROLS
-                                                                                                                                                                                        ================================================== -->
+                                                                                                                                                                                                     SLIDER CONTROLS
+                                                                                                                                                                                                ================================================== -->
 
         <div class="jme-container hero-control-container">
 
@@ -315,8 +334,8 @@
 
 
     <!-- =====================================================
-                                                                                                                                                                                         ABOUT JME - ENGINEERING CROSS SECTION
-                                                                                                                                                                                    ====================================================== -->
+                                                                                                                                                                                                 ABOUT JME - ENGINEERING CROSS SECTION
+                                                                                                                                                                                            ====================================================== -->
 
     <section class="jme-about-x" id="jmeAboutX">
 
@@ -325,8 +344,8 @@
             <div class="about-x-shell">
 
                 <!-- =============================================
-                                                                                                                                                                                                     IMAGE ZONE
-                                                                                                                                                                                                ============================================== -->
+                                                                                                                                                                                                             IMAGE ZONE
+                                                                                                                                                                                                        ============================================== -->
 
                 <div class="about-x-visual">
 
@@ -352,8 +371,8 @@
 
 
                 <!-- =============================================
-                                                                                                                                                                                                     CONTENT
-                                                                                                                                                                                                ============================================== -->
+                                                                                                                                                                                                             CONTENT
+                                                                                                                                                                                                        ============================================== -->
 
                 <div class="about-x-content">
 
@@ -388,8 +407,8 @@
 
 
                     <!-- =========================================
-                                                                                                                                                                                                         ENGINEERING RAIL
-                                                                                                                                                                                                    ========================================== -->
+                                                                                                                                                                                                                 ENGINEERING RAIL
+                                                                                                                                                                                                            ========================================== -->
 
 
                     <div class="about-x-rail">
@@ -416,12 +435,12 @@
                     </div>
 
                     <!-- =========================================
-                                                                                                                                                                                                         BOTTOM
-                                                                                                                                                                                                    ========================================== -->
+                                                                                                                                                                                                                 BOTTOM
+                                                                                                                                                                                                            ========================================== -->
 
                     <div class="about-x-bottom">
 
-                        <a href="{{route('about')}}" class="jme-btn">
+                        <a href="{{ route('about') }}" class="jme-btn">
 
                             <span class="jme-btn-text">
                                 Know More About JME
@@ -474,17 +493,17 @@
 
 
     <!-- =====================================================
-                                                                                                                                                                                         JME CORE SERVICES
-                                                                                                                                                                                         5 SERVICE EPC HUB
-                                                                                                                                                                                    ====================================================== -->
+                                                                                                                                                                                                 JME CORE SERVICES
+                                                                                                                                                                                                 5 SERVICE EPC HUB
+                                                                                                                                                                                            ====================================================== -->
 
     <section class="jme-service-hub">
 
         <div class="jme-container">
 
             <!-- =============================================
-                                                                                                                                                                                                 SECTION HEADING
-                                                                                                                                                                                            ============================================== -->
+                                                                                                                                                                                                         SECTION HEADING
+                                                                                                                                                                                                    ============================================== -->
 
             <div class="service-hub-head">
 
@@ -551,8 +570,8 @@
 
 
             <!-- =============================================
-                                                                                                                                                                                                 SERVICE HUB
-                                                                                                                                                                                            ============================================== -->
+                                                                                                                                                                                                         SERVICE HUB
+                                                                                                                                                                                                    ============================================== -->
 
             <div class="service-hub-layout">
 
@@ -640,16 +659,16 @@
     </section>
 
     <!-- =====================================================
-                                                                                                                                                                                         JME CORE WORK SECTORS
-                                                                                                                                                                                    ====================================================== -->
+                                                                                                                                                                                                 JME CORE WORK SECTORS
+                                                                                                                                                                                            ====================================================== -->
 
     <section class="jme-sector-showcase" id="coreWorkSectors">
 
         <div class="jme-container">
 
             <!-- =============================================
-                                                                                                                                                                                                 SECTION HEADING
-                                                                                                                                                                                            ============================================== -->
+                                                                                                                                                                                                         SECTION HEADING
+                                                                                                                                                                                                    ============================================== -->
 
             <div class="jme-sector-showcase-head">
 
@@ -771,8 +790,8 @@
 
 
                 <!-- =========================================
-                                                                                                                                                                                                     02 ELECTRICAL
-                                                                                                                                                                                                ========================================== -->
+                                                                                                                                                                                                             02 ELECTRICAL
+                                                                                                                                                                                                        ========================================== -->
 
                 <article class="jme-sector-card">
 
@@ -845,8 +864,8 @@
 
 
                 <!-- =========================================
-                                                                                                                                                                                                     03 PASSIVE NETWORK
-                                                                                                                                                                                                ========================================== -->
+                                                                                                                                                                                                             03 PASSIVE NETWORK
+                                                                                                                                                                                                        ========================================== -->
 
                 <article class="jme-sector-card">
 
@@ -927,15 +946,14 @@
 
 
                 <!-- =========================================
-                                                                                                                                                                                                     04 FIRE & SAFETY
-                                                                                                                                                                                                ========================================== -->
+                                                                                                                                                                                                             04 FIRE & SAFETY
+                                                                                                                                                                                                        ========================================== -->
 
                 <article class="jme-sector-card">
 
                     <div class="jme-sector-card-media">
 
-                        <img src="{{ asset('front/images/service-fire.jpg') }}"
-                            alt="Fireline and Safety Projects">
+                        <img src="{{ asset('front/images/service-fire.jpg') }}" alt="Fireline and Safety Projects">
 
                         <div class="jme-sector-card-shape jme-sector-card-shape-green">
 
@@ -1008,8 +1026,8 @@
 
 
             <!-- =============================================
-                                                                                                                                                                                                 KEY MATERIALS
-                                                                                                                                                                                            ============================================== -->
+                                                                                                                                                                                                         KEY MATERIALS
+                                                                                                                                                                                                    ============================================== -->
 
             <div class="jme-standard-strip">
 
@@ -1269,8 +1287,8 @@
     </section>
 
     <!-- =====================================================
-                                                                                                                                                                                         JME INDIA NETWORK
-                                                                                                                                                                                    ====================================================== -->
+                                                                                                                                                                                                 JME INDIA NETWORK
+                                                                                                                                                                                            ====================================================== -->
 
     <section class="jme-india-network" id="jmeIndiaPresence">
 
@@ -1278,8 +1296,8 @@
 
 
             <!-- =============================================
-                                                                                                                                                                                                 SECTION HEADER
-                                                                                                                                                                                            ============================================== -->
+                                                                                                                                                                                                         SECTION HEADER
+                                                                                                                                                                                                    ============================================== -->
 
             <div class="jme-india-network-head">
 
@@ -1329,15 +1347,15 @@
 
 
             <!-- =============================================
-                                                                                                                                                                                                 MAIN NETWORK BOARD
-                                                                                                                                                                                            ============================================== -->
+                                                                                                                                                                                                         MAIN NETWORK BOARD
+                                                                                                                                                                                                    ============================================== -->
 
             <div class="jme-india-network-board">
 
 
                 <!-- =========================================
-                                                                                                                                                                                                     LEFT PANEL
-                                                                                                                                                                                                ========================================== -->
+                                                                                                                                                                                                             LEFT PANEL
+                                                                                                                                                                                                        ========================================== -->
 
                 <aside class="jme-india-network-proof">
 
@@ -1494,8 +1512,8 @@
 
 
                 <!-- =========================================
-                                                                                                                                                                                                     CENTER MAP
-                                                                                                                                                                                                ========================================== -->
+                                                                                                                                                                                                             CENTER MAP
+                                                                                                                                                                                                        ========================================== -->
 
                 <div class="jme-india-network-map-panel">
 
@@ -1533,9 +1551,9 @@
 
 
                         <!-- =================================
-                                                                                                                                                                                                             IMPORTANT:
-                                                                                                                                                                                                             OVERLAY PARENT + IMAGE SAME SIZE
-                                                                                                                                                                                                        ================================== -->
+                                                                                                                                                                                                                     IMPORTANT:
+                                                                                                                                                                                                                     OVERLAY PARENT + IMAGE SAME SIZE
+                                                                                                                                                                                                                ================================== -->
 
                         <div class="jme-india-map-image-box">
 
@@ -1547,9 +1565,9 @@
 
 
                             <!-- =================================
-                                                                                                                                                                                                                 ACTIVE MARKER ONLY
-                                                                                                                                                                                                                 NO EXTRA STATIC DOTS
-                                                                                                                                                                                                            ================================== -->
+                                                                                                                                                                                                                         ACTIVE MARKER ONLY
+                                                                                                                                                                                                                         NO EXTRA STATIC DOTS
+                                                                                                                                                                                                                    ================================== -->
 
                             <div class="jme-india-map-active" id="jmeIndiaActiveMarker">
 
@@ -1590,8 +1608,8 @@
 
 
                 <!-- =========================================
-                                                                                                                                                                                                     RIGHT PANEL
-                                                                                                                                                                                                ========================================== -->
+                                                                                                                                                                                                             RIGHT PANEL
+                                                                                                                                                                                                        ========================================== -->
 
                 <div class="jme-india-network-monitor">
 
@@ -1742,7 +1760,7 @@
 
                     <!-- BUTTON -->
 
-                    <a href="{{route('contactus')}}" class="jme-btn">
+                    <a href="{{ route('contactus') }}" class="jme-btn">
 
                         <span class="jme-btn-text">
                             Connect With JME
@@ -1765,8 +1783,8 @@
 
 
             <!-- =============================================
-                                                                                                                                                                                                 BOTTOM RAIL
-                                                                                                                                                                                            ============================================== -->
+                                                                                                                                                                                                         BOTTOM RAIL
+                                                                                                                                                                                                    ============================================== -->
 
             <div class="jme-india-network-bottom">
 
@@ -1821,8 +1839,8 @@
     </section>
 
     <!-- =========================================================
-                                                         OUR CLIENTS - CLEAN LOGO AUTO SLIDER
-                                                    ========================================================= -->
+                                                                 OUR CLIENTS - CLEAN LOGO AUTO SLIDER
+                                                            ========================================================= -->
 
     <section class="jme-clients-strip">
 
@@ -1840,15 +1858,15 @@
 
 
                 <!-- =================================================
-                                                                     AUTO SCROLL TRACK
-                                                                ================================================== -->
+                                                                             AUTO SCROLL TRACK
+                                                                        ================================================== -->
 
                 <div class="jme-clients-strip-track">
 
 
                     <!-- =============================================
-                                                                         GROUP 01
-                                                                    ============================================== -->
+                                                                                 GROUP 01
+                                                                            ============================================== -->
 
                     <div class="jme-clients-strip-group">
 
@@ -1879,16 +1897,16 @@
     </section>
 
     <!-- =====================================================
-                                                                                                                     JME LATEST INSIGHTS
-                                                                                                            ====================================================== -->
+                                                                                                                             JME LATEST INSIGHTS
+                                                                                                                    ====================================================== -->
 
     <section class="jme-latest-insights" id="latestInsights">
 
         <div class="jme-container">
 
             <!-- =============================================
-                                                                                                                            SECTION HEADER
-                                                                                                                     ============================================== -->
+                                                                                                                                    SECTION HEADER
+                                                                                                                             ============================================== -->
 
             <div class="jme-latest-head">
 

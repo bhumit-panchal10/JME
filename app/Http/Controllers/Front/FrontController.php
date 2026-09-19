@@ -12,7 +12,7 @@ use App\Models\Service;
 use App\Models\VideoGallery;
 use App\Models\PhotoGallery;
 use App\Models\Inquiry;
-
+use App\Models\MetaData;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -29,6 +29,7 @@ class FrontController extends Controller
     public function index(Request $request)
     {
         try {
+            $meta = MetaData::where('id', '=', '1')->first();
             $categories = Category::with('services')
                 ->orderBy('id', 'asc')
                 ->take(5)
@@ -38,7 +39,7 @@ class FrontController extends Controller
                 ->take(3)
                 ->get();
             $ourclients = OurClient::get();
-            return view('frontview.index', compact('categories', 'blogs', 'ourclients'));
+            return view('frontview.index', compact('categories', 'blogs', 'ourclients', 'meta'));
         } catch (\Throwable $th) {
             Log::error('Home Page Error: ' . $th->getMessage(), [
                 'exception' => $th
@@ -50,7 +51,8 @@ class FrontController extends Controller
     public function about(Request $request)
     {
         try {
-            return view('frontview.about');
+            $meta = MetaData::where('id', '=', '2')->first();
+            return view('frontview.about', compact('meta'));
         } catch (\Throwable $th) {
             Log::error('About Page Error: ' . $th->getMessage(), [
                 'exception' => $th
@@ -62,8 +64,9 @@ class FrontController extends Controller
     public function photogallery(Request $request)
     {
         try {
+            $meta = MetaData::where('id', '=', '7')->first();
             $photogallery = photogallery::latest('id')->paginate(8);
-            return view('frontview.photo_gallery', compact('photogallery'));
+            return view('frontview.photo_gallery', compact('photogallery', 'meta'));
         } catch (\Throwable $th) {
             Log::error('About Page Error: ' . $th->getMessage(), [
                 'exception' => $th
@@ -75,8 +78,9 @@ class FrontController extends Controller
     public function videogallery(Request $request)
     {
         try {
+            $meta = MetaData::where('id', '=', '8')->first();
             $video_gallery = videogallery::latest('id')->paginate(9);
-            return view('frontview.video_gallery', compact('video_gallery'));
+            return view('frontview.video_gallery', compact('video_gallery', 'meta'));
         } catch (\Throwable $th) {
             Log::error('About Page Error: ' . $th->getMessage(), [
                 'exception' => $th
@@ -88,31 +92,33 @@ class FrontController extends Controller
 
     public function blog(Request $request)
     {
-        //$seo = MetaData::where('id', '=', '2')->first();
+        $meta = MetaData::where('id', '=', '9')->first();
         $blogs = Blog::orderBy('id', 'asc')
             ->paginate();
 
-        return view('frontview.blog', compact('blogs'));
+        return view('frontview.blog', compact('blogs', 'meta'));
     }
 
     public function blog_detail(Request $request, $slugname)
     {
+        $meta = Blog::where(['slugname' => $slugname])
+            ->first();
         $Blog = Blog::with('service')->orderBy('id', 'asc')
             ->where(['slugname' => $slugname])
             ->first();
-
         $RecentBlog = Blog::orderBy('id', 'asc')
             ->where('slugname', '!=', $slugname)
             ->take(4)
             ->get();
 
-        return view('frontview.blog_detail', compact('Blog', 'RecentBlog'));
+        return view('frontview.blog_detail', compact('Blog', 'RecentBlog', 'meta'));
     }
 
     public function contactus(Request $request)
     {
         try {
-            return view('frontview.contact');
+            $meta = MetaData::where('id', '=', '11')->first();
+            return view('frontview.contact', compact('meta'));
         } catch (\Throwable $th) {
             Log::error('Contact Page Load Error: ' . $th->getMessage(), [
                 'exception' => $th
@@ -127,13 +133,14 @@ class FrontController extends Controller
     public function service(Request $request, $slugname = null)
     {
         try {
+            $meta = Category::where('slugname', $slugname)->first();
             if ($slugname) {
                 $Category = Category::where('slugname', $slugname)->first();
                 $Services = Service::where('category_id', $Category->id)->paginate();
             } else {
                 $Services = Service::paginate();
             }
-            return view('frontview.service', compact('Services', 'Category'));
+            return view('frontview.service', compact('Services', 'Category', 'meta'));
         } catch (\Throwable $th) {
             Log::error('Contact Page Load Error: ' . $th->getMessage(), [
                 'exception' => $th
@@ -148,13 +155,15 @@ class FrontController extends Controller
     public function servicedetail(Request $request, $slugname = null)
     {
         try {
+            $meta = \App\Models\Service::where('slugname', $slugname)
+                ->first();
             $service = \App\Models\Service::with('photoGalleries')
                 ->where('slugname', $slugname)
                 ->firstOrFail();
             $faqs = Faq::where('service_id', $service->id)->get();
             $blogs = Blog::where('service_id', $service->id)->get();
             $videos = VideoGallery::where('service_id', $service->id)->get();
-            return view('frontview.service_detail', compact('service', 'faqs', 'blogs', 'videos'));
+            return view('frontview.service_detail', compact('meta', 'service', 'faqs', 'blogs', 'videos', 'meta'));
         } catch (\Throwable $th) {
             Log::error('Contact Page Load Error: ' . $th->getMessage(), [
                 'exception' => $th
@@ -166,7 +175,7 @@ class FrontController extends Controller
         }
     }
 
-     public function contact_us_store(Request $request)
+    public function contact_us_store(Request $request)
     {
         // try {
 
@@ -203,7 +212,7 @@ class FrontController extends Controller
             ];
 
             // ✅ Send email
-           $mail =  Mail::send('emails.contactusmail', ['data' => $data], function ($message) use ($msg) {
+            $mail =  Mail::send('emails.contactusmail', ['data' => $data], function ($message) use ($msg) {
                 $message->from($msg['FromMail'], $msg['Title']);
                 $message->to($msg['ToEmail'])->subject($msg['Subject']);
             });
@@ -221,8 +230,8 @@ class FrontController extends Controller
         //         ->with('error', 'Something went wrong while submitting the form. Please try again later.');
         // }
     }
-    
-     public function thankyou()
+
+    public function thankyou()
     {
         try {
             return view('thankyouPage');

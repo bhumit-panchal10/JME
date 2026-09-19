@@ -38,6 +38,7 @@ use App\Http\Controllers\InquiryController;
 // Route::fallback(function () {
 //     return view('errors.404'); // Make sure the view path matches your custom 404 page
 // });
+Route::get('/', [FrontController::class, 'index'])->name('index');
 
 Route::get('/index', [FrontController::class, 'index'])->name('index');
 Route::get('about-us', [FrontController::class, 'about'])->name('about');

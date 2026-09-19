@@ -3,17 +3,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const menuToggle =
         document.getElementById("menuToggle");
 
+
     const navigation =
         document.getElementById("jmeNavigation");
 
-    const dropdownToggle =
-        document.querySelector(".dropdown-toggle");
 
-    const dropdownParent =
-        document.querySelector(".has-dropdown");
+    const dropdownParents =
+        document.querySelectorAll(".has-dropdown");
+
 
     const header =
         document.getElementById("jmeHeader");
+
 
 
     /* =========================
@@ -28,6 +29,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
             navigation.classList.toggle("active");
 
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                navigation.classList.contains("active")
+                    ? "true"
+                    : "false"
+            );
+
         });
 
     }
@@ -35,10 +44,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================
-       MOBILE DROPDOWN
+       MOBILE DROPDOWNS
     ========================= */
 
-    if (dropdownToggle && dropdownParent) {
+    dropdownParents.forEach(function (dropdownParent) {
+
+        const dropdownToggle =
+            dropdownParent.querySelector(".dropdown-toggle");
+
+
+        if (!dropdownToggle) {
+            return;
+        }
+
 
         dropdownToggle.addEventListener("click", function (event) {
 
@@ -46,13 +64,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 event.preventDefault();
 
-                dropdownParent.classList.toggle("open");
+
+                const isOpen =
+                    dropdownParent.classList.contains("open");
+
+
+                /* CLOSE ALL DROPDOWNS */
+
+                dropdownParents.forEach(function (item) {
+
+                    item.classList.remove("open");
+
+
+                    const toggle =
+                        item.querySelector(".dropdown-toggle");
+
+
+                    if (toggle) {
+
+                        toggle.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
+
+                });
+
+
+                /* OPEN CLICKED DROPDOWN */
+
+                if (!isOpen) {
+
+                    dropdownParent.classList.add("open");
+
+
+                    dropdownToggle.setAttribute(
+                        "aria-expanded",
+                        "true"
+                    );
+
+                }
 
             }
 
         });
 
-    }
+    });
 
 
 
@@ -94,17 +152,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
             }
 
+
             if (menuToggle) {
 
                 menuToggle.classList.remove("active");
 
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
             }
 
-            if (dropdownParent) {
 
-                dropdownParent.classList.remove("open");
+            dropdownParents.forEach(function (item) {
 
-            }
+                item.classList.remove("open");
+
+
+                const toggle =
+                    item.querySelector(".dropdown-toggle");
+
+
+                if (toggle) {
+
+                    toggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
+
+            });
 
         }
 
@@ -1917,7 +1996,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     );
 
-});document.addEventListener("DOMContentLoaded", function () {
+});
+document.addEventListener("DOMContentLoaded", function () {
 
     const galleryImages = document.querySelectorAll(
         ".jme-simple-gallery-item img"
@@ -2043,265 +2123,368 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-});document.addEventListener("DOMContentLoaded", function () {
+});
+/* =========================================================
+   JME SERVICE VIDEO - INLINE PLAY
+========================================================= */
 
-    const videoCards =
-        document.querySelectorAll(
-            ".jme-service-video-card"
-        );
+/* =========================================================
+   SERVICE VIDEO - PLAY INSIDE CARD
+========================================================= */
 
-    const modal =
-        document.getElementById(
-            "jmeVideoModal"
-        );
+document.addEventListener("DOMContentLoaded", function () {
 
-    const iframe =
-        document.getElementById(
-            "jmeVideoIframe"
-        );
+    const cards =
+        document.querySelectorAll(".jme-service-video-card");
 
-    const closeBtn =
-        document.getElementById(
-            "jmeVideoModalClose"
-        );
-
-    const backdrop =
-        modal.querySelector(
-            ".jme-video-modal-backdrop"
-        );
+    if (!cards.length) {
+        return;
+    }
 
 
     /* =====================================================
-       CONVERT VIDEO URL TO EMBED URL
+       GET YOUTUBE ID
     ====================================================== */
 
-    function getEmbedUrl(url) {
+    function getYoutubeId(url) {
 
         if (!url) {
             return "";
         }
 
+        try {
 
-        /* =========================
-           YOUTUBE NORMAL URL
-        ========================== */
+            /* youtube.com/watch?v= */
 
-        if (
-            url.includes(
-                "youtube.com/watch"
-            )
-        ) {
+            if (url.includes("youtube.com/watch")) {
 
-            const videoUrl =
-                new URL(url);
+                const parsedUrl = new URL(url);
 
-            const videoId =
-                videoUrl.searchParams.get(
-                    "v"
-                );
-
-            if (videoId) {
-
-                return (
-                    "https://www.youtube.com/embed/" +
-                    videoId +
-                    "?autoplay=1&rel=0"
-                );
-
-            }
-
-        }
-
-
-        /* =========================
-           YOUTUBE SHORT URL
-        ========================== */
-
-        if (
-            url.includes(
-                "youtu.be/"
-            )
-        ) {
-
-            const videoId =
-                url.split(
-                    "youtu.be/"
-                )[1]
-                .split("?")[0];
-
-
-            return (
-                "https://www.youtube.com/embed/" +
-                videoId +
-                "?autoplay=1&rel=0"
-            );
-
-        }
-
-
-        /* =========================
-           GOOGLE DRIVE VIDEO
-        ========================== */
-
-        if (
-            url.includes(
-                "drive.google.com"
-            )
-        ) {
-
-            let fileId = "";
-
-
-            /* /file/d/FILE_ID/view */
-
-            if (
-                url.includes(
-                    "/file/d/"
-                )
-            ) {
-
-                fileId =
-                    url
-                        .split(
-                            "/file/d/"
-                        )[1]
-                        .split("/")[0];
+                return parsedUrl.searchParams.get("v") || "";
 
             }
 
 
-            /* open?id=FILE_ID */
+            /* youtu.be */
 
-            else if (
-                url.includes(
-                    "id="
-                )
-            ) {
+            if (url.includes("youtu.be/")) {
 
-                const driveUrl =
+                return url
+                    .split("youtu.be/")[1]
+                    .split("?")[0]
+                    .split("&")[0];
+
+            }
+
+
+            /* youtube shorts */
+
+            if (url.includes("youtube.com/shorts/")) {
+
+                return url
+                    .split("youtube.com/shorts/")[1]
+                    .split("?")[0]
+                    .split("/")[0];
+
+            }
+
+
+            /* youtube embed */
+
+            if (url.includes("youtube.com/embed/")) {
+
+                return url
+                    .split("youtube.com/embed/")[1]
+                    .split("?")[0]
+                    .split("/")[0];
+
+            }
+
+        } catch (error) {
+
+            console.log("Video URL Error:", error);
+
+        }
+
+        return "";
+    }
+
+
+
+    /* =====================================================
+       GOOGLE DRIVE EMBED
+    ====================================================== */
+
+    function getGoogleDriveEmbed(url) {
+
+        if (!url || !url.includes("drive.google.com")) {
+            return "";
+        }
+
+
+        let fileId = "";
+
+
+        /* /file/d/FILE_ID/view */
+
+        if (url.includes("/file/d/")) {
+
+            fileId =
+                url
+                    .split("/file/d/")[1]
+                    .split("/")[0];
+
+        }
+
+
+        /* open?id=FILE_ID */
+
+        else {
+
+            try {
+
+                const parsedUrl =
                     new URL(url);
 
                 fileId =
-                    driveUrl.searchParams.get(
-                        "id"
-                    );
+                    parsedUrl.searchParams.get("id") || "";
 
-            }
+            } catch (error) {
 
-
-            if (fileId) {
-
-                return (
-                    "https://drive.google.com/file/d/" +
-                    fileId +
-                    "/preview"
-                );
+                fileId = "";
 
             }
 
         }
 
 
-        return url;
+        if (!fileId) {
+            return "";
+        }
+
+
+        return (
+            "https://drive.google.com/file/d/" +
+            fileId +
+            "/preview"
+        );
 
     }
 
 
 
     /* =====================================================
-       OPEN VIDEO
+       STOP OTHER VIDEOS
     ====================================================== */
 
-    videoCards.forEach(function (card) {
+    function stopOtherVideos(activeCard) {
 
-        card.addEventListener(
-            "click",
-            function () {
+        cards.forEach(function (card) {
 
-                const videoUrl =
-                    card.getAttribute(
-                        "data-video-url"
-                    );
+            if (card === activeCard) {
+                return;
+            }
 
 
-                const embedUrl =
-                    getEmbedUrl(
-                        videoUrl
-                    );
-
-
-                if (!embedUrl) {
-                    return;
-                }
-
-
-                iframe.src =
-                    embedUrl;
-
-
-                modal.classList.add(
-                    "active"
+            const preview =
+                card.querySelector(
+                    ".jme-service-video-preview"
                 );
 
 
-                document.body.style.overflow =
-                    "hidden";
+            if (!preview) {
+                return;
+            }
+
+
+            const originalHtml =
+                preview.dataset.originalHtml;
+
+
+            if (originalHtml) {
+
+                preview.innerHTML =
+                    originalHtml;
 
             }
-        );
-
-    });
 
 
+            card.classList.remove(
+                "is-playing"
+            );
 
-    /* =====================================================
-       CLOSE VIDEO
-    ====================================================== */
-
-    function closeVideo() {
-
-        modal.classList.remove(
-            "active"
-        );
+        });
 
 
-        iframe.src = "";
-
-
-        document.body.style.overflow =
-            "";
+        bindPlayButtons();
 
     }
 
 
-    closeBtn.addEventListener(
-        "click",
-        closeVideo
-    );
+
+    /* =====================================================
+       PLAY VIDEO
+    ====================================================== */
+
+    function playVideo(card) {
+
+        const preview =
+            card.querySelector(
+                ".jme-service-video-preview"
+            );
 
 
-    backdrop.addEventListener(
-        "click",
-        closeVideo
-    );
+        if (!preview) {
+            return;
+        }
 
 
-    document.addEventListener(
-        "keydown",
-        function (event) {
+        /* store original thumbnail html */
+
+        if (!preview.dataset.originalHtml) {
+
+            preview.dataset.originalHtml =
+                preview.innerHTML;
+
+        }
+
+
+        const url =
+            card.dataset.videoUrl || "";
+
+
+        const directVideoId =
+            card.dataset.videoId || "";
+
+
+        let embedUrl = "";
+
+
+        /* =============================================
+           YOUTUBE
+        ============================================== */
+
+        const youtubeId =
+            directVideoId ||
+            getYoutubeId(url);
+
+
+        if (youtubeId) {
+
+            embedUrl =
+                "https://www.youtube.com/embed/" +
+                youtubeId +
+                "?autoplay=1&rel=0&playsinline=1";
+
+        }
+
+
+        /* =============================================
+           GOOGLE DRIVE
+        ============================================== */
+
+        else if (
+            url.includes("drive.google.com")
+        ) {
+
+            embedUrl =
+                getGoogleDriveEmbed(url);
+
+        }
+
+
+        /* =============================================
+           INVALID
+        ============================================== */
+
+        if (!embedUrl) {
+
+            console.log(
+                "Unable to play video:",
+                url
+            );
+
+            return;
+        }
+
+
+        stopOtherVideos(card);
+
+
+        preview.innerHTML = `
+
+            <iframe
+                class="jme-service-inline-video"
+                src="${embedUrl}"
+                title="Service Video"
+                frameborder="0"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+
+        `;
+
+
+        card.classList.add(
+            "is-playing"
+        );
+
+    }
+
+
+
+    /* =====================================================
+       BIND BUTTON
+    ====================================================== */
+
+    function bindPlayButtons() {
+
+        cards.forEach(function (card) {
+
+            const playButton =
+                card.querySelector(
+                    ".jme-service-video-play"
+                );
+
+
+            if (!playButton) {
+                return;
+            }
+
 
             if (
-                event.key === "Escape"
+                playButton.dataset.bound === "1"
             ) {
-
-                closeVideo();
-
+                return;
             }
 
-        }
-    );
 
-});document.addEventListener(
+            playButton.dataset.bound =
+                "1";
+
+
+            playButton.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+                    playVideo(card);
+
+                }
+            );
+
+        });
+
+    }
+
+
+    bindPlayButtons();
+
+});
+document.addEventListener(
     "DOMContentLoaded",
     function () {
 

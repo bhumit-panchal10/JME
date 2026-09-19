@@ -1,5 +1,23 @@
 @extends('layouts.front')
-@section('title', 'Photo Gallery')
+@section('title', config('app.name') . '' . ($meta->metaTitle ?? ''))
+@section('opTag')
+    {{-- Meta tags --}}
+    <meta name="description" content="{{ $meta->metaDescription ?? '' }}">
+    <meta name="keywords" content="{{ $meta->metaKeyword ?? '' }}">
+    <meta name="title" content="{{ $meta->metaTitle ?? '' }}">
+@endsection
+
+@section('head')
+    {!! $meta->head ?? '' !!}
+@endsection
+
+@section('body')
+    @if (!empty($meta->body))
+        <script type="text/javascript">
+            {!! $meta->body !!}
+        </script>
+    @endif
+@endsection
 @section('content')
     <style>
         .jme-blog-pagination-wrap {
@@ -87,13 +105,12 @@
         <!-- Dark overlay -->
         <div class="jme-inner-overlay"></div>
 
-
         <div class="container">
             <div class="jme-inner-content">
 
                 <!-- =========================
-                                                         WHITE CONTENT CARD
-                                                    ========================== -->
+                                                                     WHITE CONTENT CARD
+                                                                ========================== -->
                 <div class="jme-inner-card">
 
                     <div class="jme-card-tag">
@@ -160,8 +177,8 @@
 
 
         <!-- =========================
-                                                 BOTTOM NAVY STRIP
-                                            ========================== -->
+                                                             BOTTOM NAVY STRIP
+                                                        ========================== -->
         <div class="jme-bottom-strip">
 
             <span class="bottom-green-shape"></span>
@@ -264,77 +281,61 @@
 
     </section>
 
-{{-- =========================================
+    {{-- =========================================
     PHOTO GALLERY LIGHTBOX
 ========================================= --}}
 
-<dialog class="jme-gallery-dialog" id="galleryLightbox">
+    <dialog class="jme-gallery-dialog" id="galleryLightbox">
 
-    <div class="jme-lightbox-box">
+        <div class="jme-lightbox-box">
 
-        {{-- CLOSE BUTTON --}}
-        <button
-            type="button"
-            class="jme-lightbox-close"
-            id="lightboxClose"
-            aria-label="Close">
-
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 6l12 12M18 6L6 18"></path>
-            </svg>
-
-        </button>
-
-
-        <div class="jme-lightbox-image-wrapper">
-
-            {{-- PREVIOUS --}}
-            <button
-                type="button"
-                class="jme-lightbox-arrow jme-lightbox-prev"
-                id="lightboxPrev"
-                aria-label="Previous Image">
+            {{-- CLOSE BUTTON --}}
+            <button type="button" class="jme-lightbox-close" id="lightboxClose" aria-label="Close">
 
                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M15 18l-6-6 6-6"></path>
+                    <path d="M6 6l12 12M18 6L6 18"></path>
                 </svg>
 
             </button>
 
 
-            {{-- POPUP IMAGE --}}
-            <img
-                src=""
-                alt="Gallery Preview"
-                id="lightboxImage"
-            >
+            <div class="jme-lightbox-image-wrapper">
+
+                {{-- PREVIOUS --}}
+                <button type="button" class="jme-lightbox-arrow jme-lightbox-prev" id="lightboxPrev"
+                    aria-label="Previous Image">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M15 18l-6-6 6-6"></path>
+                    </svg>
+
+                </button>
 
 
-            {{-- NEXT --}}
-            <button
-                type="button"
-                class="jme-lightbox-arrow jme-lightbox-next"
-                id="lightboxNext"
-                aria-label="Next Image">
-
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M9 6l6 6-6 6"></path>
-                </svg>
-
-            </button>
+                {{-- POPUP IMAGE --}}
+                <img src="" alt="Gallery Preview" id="lightboxImage">
 
 
-            {{-- COUNTER --}}
-            <div
-                class="jme-lightbox-counter"
-                id="lightboxCounter">
+                {{-- NEXT --}}
+                <button type="button" class="jme-lightbox-arrow jme-lightbox-next" id="lightboxNext"
+                    aria-label="Next Image">
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M9 6l6 6-6 6"></path>
+                    </svg>
+
+                </button>
+
+
+                {{-- COUNTER --}}
+                <div class="jme-lightbox-counter" id="lightboxCounter">
+                </div>
+
             </div>
 
         </div>
 
-    </div>
-
-</dialog>
+    </dialog>
 @endsection
 @section('scripts')
 @endsection
