@@ -29,13 +29,13 @@
          FAVICON
     ========================== -->
 
-    <link rel="icon" type="image/png" href="{{ asset('assets/front/images/favicon.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('front/images/favicon.png') }}">
 
 
     <!-- =========================
          EXTERNAL CSS
     ========================== -->
 
-    <link rel="stylesheet" href="{{ asset('assets/front/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
 
 </head>

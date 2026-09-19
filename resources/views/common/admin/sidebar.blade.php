@@ -112,9 +112,9 @@
 
                                             <i class="nav-icon fas fa-users"></i>
 
-                                            <p>
-                                                Our Clients
-                                            </p>
+
+                                            Our Clients
+
 
                                         </a>
 
@@ -178,13 +178,13 @@
                             </a>
                         </li> --}}
 
-                        {{-- <li class="nav-item">
-                            <a class="nav-link menu-link @if (request()->routeIs('ContactUsInquiry.index')) {{ 'active' }} @endif"
-                                href="{{ route('ContactUsInquiry.index') }}">
+                        <li class="nav-item">
+                            <a class="nav-link menu-link @if (request()->routeIs('Inquiry')) {{ 'active' }} @endif"
+                                href="{{ route('Inquiry') }}">
                                 <i class="fa-solid fa-circle-question"></i>
                                 <span data-key="t-dashboards">Contac Us Inquiry</span>
                             </a>
-                        </li> --}}
+                        </li>
                     @else
                         <li class="nav-item">
                             <a class="nav-link menu-link @if (request()->routeIs('order.userpending')) {{ 'active' }} @endif"

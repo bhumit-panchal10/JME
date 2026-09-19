@@ -90,9 +90,7 @@ class OurClientController extends Controller
                     time() . '.' .
                     $image->getClientOriginalExtension();
 
-                $uploadPath =
-                    public_path('our-client');
-
+                $uploadPath = FolderPath('our-client');
 
                 if (!File::exists($uploadPath)) {
 
@@ -209,11 +207,7 @@ class OurClientController extends Controller
                 */
                 if (!empty($ourClient->image)) {
 
-                    $oldImage =
-                        public_path(
-                            'our-client/' .
-                                $ourClient->image
-                        );
+                   $oldImage = FolderPath('our-client') . '/' . $ourClient->image;
 
                     if (File::exists($oldImage)) {
 
@@ -229,9 +223,7 @@ class OurClientController extends Controller
                     time() . '.' .
                     $image->getClientOriginalExtension();
 
-                $uploadPath =
-                    public_path('our-client');
-
+                $uploadPath = FolderPath('our-client');
 
                 if (!File::exists($uploadPath)) {
 
@@ -302,11 +294,7 @@ class OurClientController extends Controller
             */
             if (!empty($ourClient->image)) {
 
-                $imagePath =
-                    public_path(
-                        'our-client/' .
-                            $ourClient->image
-                    );
+                $imagePath = FolderPath('our-client') . '/' . $ourClient->image;
 
                 if (File::exists($imagePath)) {
 
@@ -376,11 +364,7 @@ class OurClientController extends Controller
                 */
                 if (!empty($ourClient->image)) {
 
-                    $imagePath =
-                        public_path(
-                            'our-client/' .
-                                $ourClient->image
-                        );
+                   $imagePath = FolderPath('our-client') . '/' . $ourClient->image;
 
                     if (File::exists($imagePath)) {
 

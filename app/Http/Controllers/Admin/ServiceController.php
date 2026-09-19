@@ -131,7 +131,7 @@ class ServiceController extends Controller
                     '.' .
                     $image->getClientOriginalExtension();
 
-                $destinationPath = public_path('services');
+                 $destinationPath = FolderPath('services');
 
                 if (!File::exists($destinationPath)) {
                     File::makeDirectory(
@@ -253,9 +253,7 @@ class ServiceController extends Controller
                  */
                 if (!empty($service->image)) {
 
-                    $oldImagePath = public_path(
-                        'services/' . $service->image
-                    );
+                    $oldImagePath = FolderPath('services') . '/' . $service->image;
 
                     if (File::exists($oldImagePath)) {
                         File::delete($oldImagePath);
@@ -271,7 +269,7 @@ class ServiceController extends Controller
                     '.' .
                     $image->getClientOriginalExtension();
 
-                $destinationPath = public_path('services');
+                $destinationPath = FolderPath('services');
 
                 if (!File::exists($destinationPath)) {
                     File::makeDirectory(
@@ -325,9 +323,7 @@ class ServiceController extends Controller
              */
             if (!empty($service->image)) {
 
-                $imagePath = public_path(
-                    'services/' . $service->image
-                );
+                $imagePath = FolderPath('services') . '/' . $service->image;
 
                 if (File::exists($imagePath)) {
                     File::delete($imagePath);
@@ -373,9 +369,7 @@ class ServiceController extends Controller
                  */
                 if (!empty($service->image)) {
 
-                    $imagePath = public_path(
-                        'services/' . $service->image
-                    );
+                   $imagePath = FolderPath('services') . '/' . $service->image;
 
                     if (File::exists($imagePath)) {
                         File::delete($imagePath);

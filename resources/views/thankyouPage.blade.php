@@ -1,101 +1,205 @@
 @extends('layouts.front')
 @section('title', 'Success')
 @section('content')
+    <main>
 
-    <div class="overlay" id="overlay">
-        <div class="loader"></div>
-    </div>
+        <section class="jme-thankyou">
 
-    <style type="text/css">
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
+            <!-- BACKGROUND DECORATION -->
+            <span class="jme-thankyou-line line-one"></span>
+            <span class="jme-thankyou-line line-two"></span>
+            <span class="jme-thankyou-line line-three"></span>
 
 
-        .loader {
-            border: 8px solid #f3f3f3;
-            border-top: 8px solid #8c563d;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 2s linear infinite;
-        }
+            <div class="container">
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
+                <div class="jme-thankyou-wrap">
 
 
-    <section class="bg-img1 txt-center p-lr-15 p-tb-92"
-        style="background-image: url({{ asset('assets/frontimages/catagory/SHOP.jpg') }};">
-        <div class="container">
-            <!--<h6 class="ltext-105 cl0 txt-center">-->
-            <!--	Order Success-->
-            <!--</h6>-->
-            <div class="bredcrum">
-                <ul>
-                    <li><a class="text-white" href="{{ route('front.index') }}">Home</a></li>
-                    <li><img src="{{ asset('assets/images/breadcrumb.png') }}" alt=""></li>
-                </ul>
-            </div>
-        </div>
-    </section>
+                    <!-- TOP LABEL -->
 
-    <!-- Shoping Cart -->
-    <div class="bg0" style="min-height:340px; padding:50px 0px 80px 0px;">
-        <div class="container ">
-            <div class="row">
-                <div class="card mx-auto d-block "
-                    style="width:350px;border: 1px solid #80563e;padding:30px 10px;border-radius: 10px;">
-                    <div class="col-md-12 d-block" style="text-align: center;">
-                        <h1 style="border-bottom:1px solid #80563e;">Thank you!</h1>
+                    <div class="jme-thankyou-label">
+
+                        <span></span>
+
+                        <p>
+                            JAY MAHAKAL ENTERPRISE GROUP
+                        </p>
+
+                        <span></span>
+
                     </div>
-                    <div class="col-md-12  d-block" style="text-align: center;">
-                        <p><br />Thank you for shopping with us. <br /> We will be shipping your order to you soon.</p>
+
+
+                    <!-- SUCCESS CARD -->
+
+                    <div class="jme-thankyou-card">
+
+
+                        <!-- CHECK ICON -->
+
+                        <div class="jme-thankyou-success">
+
+                            <div class="jme-thankyou-success-ring"></div>
+
+                            <div class="jme-thankyou-success-icon">
+
+                                <svg viewBox="0 0 24 24">
+
+                                    <path d="M5 12.5l4.2 4.2L19 7"></path>
+
+                                </svg>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- CONTENT -->
+
+                        <span class="jme-thankyou-small">
+                            MESSAGE RECEIVED
+                        </span>
+
+
+                        <h1>
+                            Thank You!
+                        </h1>
+
+
+                        <h2>
+                            Your inquiry has been submitted successfully.
+                        </h2>
+
+
+                        <p class="jme-thankyou-description">
+                            Thank you for contacting Jay Mahakal Enterprise Group.
+                            Our team has received your inquiry and will connect with
+                            you as soon as possible.
+                        </p>
+
+
+
+                        <!-- DIVIDER -->
+
+                        <div class="jme-thankyou-divider">
+
+                            <span></span>
+
+                            <i></i>
+
+                            <span></span>
+
+                        </div>
+
+
+
+                        <!-- INFO -->
+
+                        <div class="jme-thankyou-note">
+
+                            <div class="jme-thankyou-note-icon">
+
+                                <svg viewBox="0 0 24 24">
+
+                                    <circle cx="12" cy="12" r="9"></circle>
+
+                                    <path d="M12 8v4"></path>
+
+                                    <path d="M12 16h.01"></path>
+
+                                </svg>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    What happens next?
+                                </strong>
+
+                                <p>
+                                    Our team will review your requirement and
+                                    contact you with the appropriate assistance.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- BUTTONS -->
+
+                        <div class="jme-thankyou-actions">
+
+                            <a href="{{ route('index') }}" class="jme-thankyou-btn primary">
+
+                                <span>
+                                    Back to Home
+                                </span>
+
+                                <svg viewBox="0 0 24 24">
+
+                                    <path d="M5 12h14"></path>
+
+                                    <path d="M13 6l6 6-6 6"></path>
+
+                                </svg>
+
+                            </a>
+
+
+                            {{-- <a href="{{ url('/services') }}" class="jme-thankyou-btn secondary">
+
+                                <span>
+                                    Explore Services
+                                </span>
+
+                            </a> --}}
+
+                        </div>
+
+
                     </div>
+
+
+
+                    <!-- BOTTOM EPC -->
+
+                    <div class="jme-thankyou-bottom">
+
+                        <span>
+                            ENGINEERING
+                        </span>
+
+                        <i></i>
+
+                        <span>
+                            PROCUREMENT
+                        </span>
+
+                        <i></i>
+
+                        <span>
+                            CONSTRUCTION
+                        </span>
+
+                    </div>
+
+
                 </div>
+
             </div>
-        </div>
-    </div>
+
+        </section>
+
+    </main>
+
 @endsection
 
 @section('scripts')
-    <script>
-        // Get reference to the overlay
-        const overlay = document.getElementById('overlay');
 
-        // Function to show the loader
-        function showLoader() {
-            overlay.style.display = 'flex'; // Display overlay
-        }
-
-        // Function to hide the loader
-        function hideLoader() {
-            overlay.style.display = 'none'; // Hide overlay
-        }
-
-        // Show loader when page loads
-        showLoader();
-
-        // Hide loader when page content is fully loaded
-        window.addEventListener('load', function() {
-            hideLoader();
-        });
-    </script>
 @endsection

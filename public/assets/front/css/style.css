@@ -18560,39 +18560,131 @@ body.gallery-open {
 
 }
 
-
 /* =========================================================
-   CLIENT CARD
+   OUR CLIENTS - CLEAN STRIP
 ========================================================= */
 
-.jme-clientline-card {
+.jme-clients-strip {
     position: relative;
 
-    width: 180px;
+    overflow: hidden;
 
-    height: 115px;
+    padding: 55px 0;
 
-    flex:
-        0
-        0
-        180px;
+    background:
+        var(--color-blue-soft-2);
+}
 
-    display: flex;
 
-    flex-direction: column;
+/* =========================================================
+   WRAPPER
+========================================================= */
 
-    align-items: center;
+.jme-clients-strip-wrap {
+    position: relative;
 
-    justify-content: center;
+    width: 100%;
 
     overflow: hidden;
 
     padding:
-        20px
-        24px;
+        18px
+        0;
+}
+
+
+/* =========================================================
+   TRACK
+========================================================= */
+
+.jme-clients-strip-track {
+    display: flex;
+
+    align-items: center;
+
+    width: max-content;
+
+    will-change: transform;
+
+    animation:
+        jmeClientsStripScroll
+        32s
+        linear
+        infinite;
+}
+
+
+/* pause whole slider when hover */
+
+.jme-clients-strip-wrap:hover
+.jme-clients-strip-track {
+    animation-play-state:
+        paused;
+}
+
+
+/* =========================================================
+   GROUP
+========================================================= */
+
+.jme-clients-strip-group {
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+    flex-shrink: 0;
+
+    padding-right: 22px;
+}
+
+
+/* =========================================================
+   INFINITE AUTO SCROLL
+========================================================= */
+
+@keyframes jmeClientsStripScroll {
+
+    from {
+        transform:
+            translate3d(0, 0, 0);
+    }
+
+    to {
+        transform:
+            translate3d(-50%, 0, 0);
+    }
+
+}
+
+
+/* =========================================================
+   WHITE BOX
+========================================================= */
+
+.jme-clients-strip-card {
+    position: relative;
+
+    width: 185px;
+    height: 110px;
+
+    flex:
+        0
+        0
+        185px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    padding: 18px;
 
     background:
-        rgba(255,255,255,.98);
+        var(--color-white);
 
     border:
         1px solid
@@ -18602,30 +18694,29 @@ body.gallery-open {
         var(--radius-large);
 
     box-shadow:
-        0 9px 28px
+        0 7px 22px
         rgba(11,45,92,.055);
 
     transition:
-        transform .40s
-        cubic-bezier(.22,1,.36,1),
-        border-color .30s ease,
-        box-shadow .30s ease;
+        transform .40s cubic-bezier(.22,1,.36,1),
+        border-color .35s ease,
+        box-shadow .35s ease;
 }
 
 
-/* top green line */
+/* =========================================================
+   TOP GREEN LINE
+========================================================= */
 
-.jme-clientline-card::before {
+.jme-clients-strip-card::before {
     content: "";
 
     position: absolute;
 
     left: 50%;
-
     top: 0;
 
     width: 0;
-
     height: 3px;
 
     background:
@@ -18635,74 +18726,73 @@ body.gallery-open {
         translateX(-50%);
 
     transition:
-        width .40s
+        width .45s
         cubic-bezier(.22,1,.36,1);
-}
-
-
-/* soft green glow */
-
-.jme-clientline-card::after {
-    content: "";
-
-    position: absolute;
-
-    width: 100px;
-
-    height: 100px;
-
-    left: 50%;
-
-    bottom: -90px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(73,169,66,.12);
-
-    transform:
-        translateX(-50%)
-        scale(.5);
-
-    transition:
-        transform .5s ease,
-        bottom .5s ease;
 }
 
 
 /* =========================================================
-   LOGO WRAPPER
+   BOTTOM NAVY LINE
 ========================================================= */
 
-.jme-clientline-logo-wrap {
-    position: relative;
+.jme-clients-strip-card::after {
+    content: "";
 
-    z-index: 3;
+    position: absolute;
 
-    width: 125px;
+    right: 0;
+    bottom: 0;
 
-    height: 62px;
+    width: 0;
+    height: 3px;
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
+    background:
+        var(--color-blue);
 
     transition:
-        transform .45s
+        width .45s
         cubic-bezier(.22,1,.36,1);
 }
 
 
-.jme-clientline-logo {
-    width: 100%;
+/* =========================================================
+   IMAGE AREA
+========================================================= */
 
+.jme-clients-strip-image {
+    position: relative;
+
+    width: 100%;
     height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   LOGO IMAGE
+========================================================= */
+
+.jme-clients-strip-image img {
+    width: 100%;
+    height: 100%;
+
+    max-width: 135px;
+    max-height: 70px;
 
     display: block;
 
     object-fit: contain;
+
+    object-position: center;
+
+    transform:
+        scale(1);
 
     transition:
         transform .45s
@@ -18712,127 +18802,45 @@ body.gallery-open {
 
 
 /* =========================================================
-   CLIENT NAME
-========================================================= */
-
-.jme-clientline-name {
-    position: absolute;
-
-    z-index: 4;
-
-    left: 50%;
-
-    bottom: 12px;
-
-    width: 90%;
-
-    color:
-        var(--color-blue);
-
-    font-size: 10px;
-
-    font-weight: 700;
-
-    letter-spacing:
-        .4px;
-
-    text-align: center;
-
-    opacity: 0;
-
-    transform:
-        translate(-50%,10px);
-
-    transition:
-        opacity .35s ease,
-        transform .35s ease;
-}
-
-
-/* =========================================================
-   FALLBACK
-========================================================= */
-
-.jme-clientline-fallback {
-    display: none;
-
-    color:
-        var(--color-blue);
-
-    font-size: 24px;
-
-    font-weight: 700;
-
-    letter-spacing: 1px;
-}
-
-
-.jme-clientline-card.logo-error
-.jme-clientline-logo {
-    display: none;
-}
-
-
-.jme-clientline-card.logo-error
-.jme-clientline-fallback {
-    display: block;
-}
-
-
-/* =========================================================
-   UNIQUE HOVER
+   HOVER
 ========================================================= */
 
 @media (hover:hover) and (pointer:fine) {
 
-    .jme-clientline-card:hover {
+    .jme-clients-strip-card:hover {
         transform:
-            translateY(-9px)
-            scale(1.04);
+            translateY(-8px)
+            scale(1.025);
 
         border-color:
-            rgba(73,169,66,.35);
+            rgba(73,169,66,.28);
 
         box-shadow:
-            0 18px 45px
-            rgba(11,45,92,.12);
+            0 18px 38px
+            rgba(11,45,92,.11);
     }
 
 
-    .jme-clientline-card:hover::before {
+    /* top line */
+
+    .jme-clients-strip-card:hover::before {
         width: 100%;
     }
 
 
-    .jme-clientline-card:hover::after {
-        bottom: -35px;
+    /* bottom line */
 
-        transform:
-            translateX(-50%)
-            scale(1.4);
+    .jme-clients-strip-card:hover::after {
+        width: 100%;
     }
 
 
-    .jme-clientline-card:hover
-    .jme-clientline-logo-wrap {
+    /* logo zoom */
+
+    .jme-clients-strip-card:hover
+    .jme-clients-strip-image img {
         transform:
-            translateY(-12px);
-    }
-
-
-    .jme-clientline-card:hover
-    .jme-clientline-logo {
-        transform:
-            scale(1.08);
-    }
-
-
-    .jme-clientline-card:hover
-    .jme-clientline-name {
-        opacity: 1;
-
-        transform:
-            translate(-50%,0);
+            scale(1.09);
     }
 
 }
@@ -18842,89 +18850,66 @@ body.gallery-open {
    SIDE FADE
 ========================================================= */
 
-.jme-clientline-fade {
+.jme-clients-strip-fade {
     position: absolute;
 
-    z-index: 10;
+    z-index: 20;
 
     top: 0;
-
     bottom: 0;
 
-    width: 90px;
+    width: 80px;
 
     pointer-events: none;
 }
 
 
-.jme-clientline-fade-left {
+.jme-clients-strip-fade-left {
     left: 0;
 
     background:
         linear-gradient(
             90deg,
-            var(--color-blue-soft-2),
-            transparent
+            var(--color-blue-soft-2) 0%,
+            rgba(246,249,252,.85) 38%,
+            transparent 100%
         );
 }
 
 
-.jme-clientline-fade-right {
+.jme-clients-strip-fade-right {
     right: 0;
 
     background:
         linear-gradient(
             270deg,
-            var(--color-blue-soft-2),
-            transparent
+            var(--color-blue-soft-2) 0%,
+            rgba(246,249,252,.85) 38%,
+            transparent 100%
         );
 }
 
 
 /* =========================================================
-   BOTTOM DETAIL
+   TABLET
 ========================================================= */
 
-.jme-clientline-bottom {
-    display: flex;
+@media (max-width: 991px) {
 
-    align-items: center;
+    .jme-clients-strip-card {
+        width: 165px;
+        height: 100px;
 
-    justify-content: center;
+        flex-basis: 165px;
+    }
 
-    gap: 17px;
 
-    margin-top: 19px;
+    .jme-clients-strip-image img {
+        max-width: 120px;
+        max-height: 62px;
+    }
+
 }
-
-
-.jme-clientline-bottom > span {
-    width: 45px;
-
-    height: 1px;
-
-    background:
-        rgba(11,45,92,.15);
-}
-
-
-.jme-clientline-bottom p {
-    margin: 0;
-
-    color:
-        var(--color-text-muted);
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    letter-spacing: 1.8px;
-
-    text-align: center;
-}
-
-
-
 
 
 /* =========================================================
@@ -18933,52 +18918,52 @@ body.gallery-open {
 
 @media (max-width: 767px) {
 
-    .jme-clientline {
+    .jme-clients-strip {
         padding:
-            50px
+            38px
             0;
     }
 
 
+    .jme-clients-strip-wrap {
+        padding:
+            12px
+            0;
+    }
 
 
-    .jme-clientline-track {
+    .jme-clients-strip-group {
         gap: 14px;
 
-        animation-duration:
-            25s;
+        padding-right: 14px;
     }
 
 
-    .jme-clientline-card {
-        width: 145px;
+    .jme-clients-strip-track {
+        animation-duration:
+            24s;
+    }
 
-        height: 95px;
 
-        flex-basis: 145px;
+    .jme-clients-strip-card {
+        width: 140px;
+        height: 88px;
+
+        flex-basis: 140px;
 
         padding:
-            15px
-            18px;
+            14px;
     }
 
 
-    .jme-clientline-logo-wrap {
-        width: 100px;
-
-        height: 50px;
+    .jme-clients-strip-image img {
+        max-width: 105px;
+        max-height: 55px;
     }
 
 
-    .jme-clientline-fade {
-        width: 35px;
-    }
-
-
-    .jme-clientline-bottom p {
-        font-size: 7px;
-
-        letter-spacing: 1px;
+    .jme-clients-strip-fade {
+        width: 30px;
     }
 
 }
@@ -18990,7 +18975,7 @@ body.gallery-open {
 
 @media (prefers-reduced-motion: reduce) {
 
-    .jme-clientline-track {
+    .jme-clients-strip-track {
         animation: none;
     }
 

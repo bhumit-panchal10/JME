@@ -1,3 +1,239 @@
+<style>
+.jme-contact-v2-info-text small {
+    font-size: 11px !important;
+}
+.jme-contact-v2-info-text p {
+            font-size: 11px !important;
+}
+    /* =========================================================
+   CONTACT SOCIAL MEDIA
+========================================================= */
+
+.jme-contact-v2-info-text .jme-contact-v2-socials {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+
+    gap: 8px;
+
+    margin-top: 7px;
+}
+
+
+/* IMPORTANT:
+   Override normal contact link CSS
+========================================================= */
+
+.jme-contact-v2-info-text
+.jme-contact-v2-socials
+.jme-contact-v2-social {
+
+    position: relative;
+
+    width: 34px;
+    height: 34px;
+
+    min-width: 34px;
+    max-width: 34px;
+
+    min-height: 34px;
+    max-height: 34px;
+
+    flex:
+        0
+        0
+        34px;
+
+    display: inline-flex !important;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    color:
+        var(--color-blue);
+
+    background:
+        var(--color-blue-soft);
+
+    border:
+        1px solid
+        var(--color-border);
+
+    border-radius: 50%;
+
+    text-decoration: none;
+
+    overflow: hidden;
+
+    line-height: 1;
+
+    transition:
+        color .3s ease,
+        background .3s ease,
+        border-color .3s ease,
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+
+/* =========================================================
+   SOCIAL SVG
+========================================================= */
+
+.jme-contact-v2-info-text
+.jme-contact-v2-socials
+.jme-contact-v2-social svg {
+
+    width: 16px !important;
+    height: 16px !important;
+
+    min-width: 16px;
+    min-height: 16px;
+
+    display: block;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    fill: none !important;
+
+    stroke:
+        currentColor !important;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    transition:
+        transform .3s ease;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.jme-contact-v2-info-text
+.jme-contact-v2-socials
+.jme-contact-v2-social:hover {
+
+    color: #ffffff !important;
+
+    background:
+        var(--color-green);
+
+    border-color:
+        var(--color-green);
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 7px 16px
+        rgba(73,169,66,.20);
+}
+
+
+.jme-contact-v2-info-text
+.jme-contact-v2-socials
+.jme-contact-v2-social:hover svg {
+
+    transform:
+        scale(1.08);
+}
+
+   .jme-captcha-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 4px 0 12px;
+        }
+
+
+        /* Captcha Image */
+        .jme-captcha-image {
+            height: 46px;
+            display: flex;
+            align-items: center;
+            border: 1px solid #e1e6ef;
+            border-radius: 6px;
+            background: #fff;
+            overflow: hidden;
+        }
+
+        .jme-captcha-image span {
+            display: flex;
+            align-items: center;
+        }
+
+        .jme-captcha-image img {
+            height: 46px;
+            width: auto;
+            display: block;
+        }
+
+
+        /* Red Refresh Button */
+        .jme-captcha-reload {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 0;
+            outline: 0;
+            border-radius: 6px;
+
+            background: #df293d;
+            color: #ffffff;
+
+            cursor: pointer;
+
+            transition:
+                background 0.25s ease,
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .jme-captcha-reload svg {
+            display: block;
+            width: 20px;
+            height: 20px;
+            stroke: #ffffff;
+        }
+
+
+        /* Hover */
+        .jme-captcha-reload:hover {
+            background: #c91f32;
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 5px 12px rgba(223, 41, 61, 0.25);
+        }
+
+
+        /* Click */
+        .jme-captcha-reload:active {
+            transform: scale(0.95);
+        }
+
+
+        /* Error */
+        .captcha-error {
+            display: block;
+            margin-top: 6px;
+            color: #df293d;
+            font-size: 12px;
+        }
+</style>
 @extends('layouts.front')
 @section('title', 'Contact Us')
 @section('content')
@@ -6,8 +242,8 @@
 
 
         <!-- =====================================================
-                 HERO
-            ====================================================== -->
+                                                                                                         HERO
+                                                                                                    ====================================================== -->
         <section class="jme-contact-v2-hero">
 
             <div class="jme-contact-v2-hero-left">
@@ -95,7 +331,7 @@
             <!-- RIGHT IMAGE -->
             <div class="jme-contact-v2-hero-image">
 
-                <img src="{{ asset('assets/front/images/breadcrumb.png') }}" alt="JME Group Industrial EPC Plant">
+                <img src="{{ asset('front/images/breadcrumb.png') }}" alt="JME Group Industrial EPC Plant">
 
                 <div class="jme-contact-v2-image-shade"></div>
 
@@ -122,8 +358,8 @@
 
 
         <!-- =====================================================
-                 FLOATING CONTACT BAR
-            ====================================================== -->
+                                                                                                         FLOATING CONTACT BAR
+                                                                                                    ====================================================== -->
         <section class="jme-contact-v2-info">
 
             <div class="jme-contact-v2-container">
@@ -131,40 +367,117 @@
                 <div class="jme-contact-v2-info-card">
 
 
-                    <!-- WEBSITE -->
-                    <div class="jme-contact-v2-info-item">
+               <div class="jme-contact-v2-info-item">
 
-                        <div class="jme-contact-v2-info-icon">
+    <div class="jme-contact-v2-info-icon">
 
-                            <svg viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="9"></circle>
-                                <path d="M3 12h18"></path>
-                                <path d="M12 3a15 15 0 0 1 0 18"></path>
-                                <path d="M12 3a15 15 0 0 0 0 18"></path>
-                            </svg>
+        <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M8 12h8"></path>
+            <path d="M12 8v8"></path>
+        </svg>
 
-                        </div>
+    </div>
 
 
-                        <div class="jme-contact-v2-info-text">
+    <div class="jme-contact-v2-info-text">
 
-                            <small>
-                                Official Website
-                            </small>
+        <small>Follow Us</small>
 
-                            <a href="https://www.jaymahakalenterprisegroup.com" target="_blank">
-                                www.jaymahakalenterprisegroup.com
-                            </a>
+        <div class="jme-contact-v2-socials">
 
-                            <p>
-                                Visit our website for more information.
-                            </p>
+            <!-- Facebook -->
+            <a href=""
+               target="_blank"
+               class="jme-contact-v2-social"
+               aria-label="Facebook">
 
-                        </div>
+                <svg viewBox="0 0 24 24">
+                    <path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v5h4v-5h3l1-4h-4V9c0-.7.3-1 1-1z"></path>
+                </svg>
 
-                    </div>
+            </a>
 
 
+            <!-- Instagram -->
+            <a href=""
+               target="_blank"
+               class="jme-contact-v2-social"
+               aria-label="Instagram">
+
+                <svg viewBox="0 0 24 24">
+
+                    <rect
+                        x="4"
+                        y="4"
+                        width="16"
+                        height="16"
+                        rx="5"
+                    ></rect>
+
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="3.5"
+                    ></circle>
+
+                    <circle
+                        cx="17"
+                        cy="7"
+                        r=".8"
+                    ></circle>
+
+                </svg>
+
+            </a>
+
+
+            <!-- LinkedIn -->
+            <a href=""
+               target="_blank"
+               class="jme-contact-v2-social"
+               aria-label="LinkedIn">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M6 9v9"></path>
+
+                    <path d="M6 6.5v.01"></path>
+
+                    <path d="M10 18v-9"></path>
+
+                    <path d="M10 13c0-2.2 1.4-4 3.8-4 2.2 0 4.2 1.5 4.2 4.5V18"></path>
+
+                </svg>
+
+            </a>
+
+
+            <!-- YouTube -->
+            <a href=""
+               target="_blank"
+               class="jme-contact-v2-social"
+               aria-label="YouTube">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M20 8.5c-.2-1.2-.9-1.9-2.1-2.1C16 6.1 14 6 12 6s-4 .1-5.9.4C4.9 6.6 4.2 7.3 4 8.5c-.2 1.1-.3 2.3-.3 3.5s.1 2.4.3 3.5c.2 1.2.9 1.9 2.1 2.1C8 17.9 10 18 12 18s4-.1 5.9-.4c1.2-.2 1.9-.9 2.1-2.1.2-1.1.3-2.3.3-3.5s-.1-2.4-.3-3.5z"></path>
+
+                    <path d="M10 9l5 3-5 3z"></path>
+
+                </svg>
+
+            </a>
+
+        </div>
+
+        <p>
+            Connect with us on social media.
+        </p>
+
+    </div>
+
+</div>
 
                     <!-- EMAIL -->
                     <div class="jme-contact-v2-info-item">
@@ -202,17 +515,33 @@
                     <!-- PHONE -->
                     <div class="jme-contact-v2-info-item">
 
-                        <div class="jme-contact-v2-info-icon">
+                      <div class="jme-contact-v2-info-icon">
 
-                            <svg viewBox="0 0 24 24">
-                                <path d="M22 16.9v3a2 2 0 0 1-2.2 2
-                                    19.7 19.7 0 0 1-8.6-3.1
-                                    19.5 19.5 0 0 1-6-6
-                                    19.7 19.7 0 0 1-3.1-8.6
-                                    A2 2 0 0 1 4.1 2h3"></path>
-                            </svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
 
-                        </div>
+        <path
+            d="M6.6 10.8
+               c1.4 2.8 3.8 5.1 6.6 6.6
+               l2.2-2.2
+               c.3-.3.8-.4 1.2-.2
+               1.3.5 2.6.8 4 .9
+               .5 0 .9.4 .9.9
+               V20
+               c0 .5-.2.9-.6 1.2
+               -1 .9-2.4 1.3-3.7 1.3
+               -8.8 0-16-7.2-16-16
+               0-1.3.4-2.7 1.3-3.7
+               .3-.4.7-.6 1.2-.6
+               h3.2
+               c.5 0 .9.4.9.9
+               .1 1.4.4 2.7.9 4
+               .1.4 0 .9-.3 1.2
+               z"
+        ></path>
+
+    </svg>
+
+</div>
 
 
                         <div class="jme-contact-v2-info-text">
@@ -243,8 +572,8 @@
 
 
         <!-- =====================================================
-                 OFFICE LOCATIONS
-            ====================================================== -->
+                                                                                                         OFFICE LOCATIONS
+                                                                                                    ====================================================== -->
         <section class="jme-contact-v2-offices">
 
             <div class="jme-contact-v2-container">
@@ -280,8 +609,8 @@
 
 
                     <!-- =========================================
-                             PRIMARY OFFICE
-                        ========================================== -->
+                                                                                                                     PRIMARY OFFICE
+                                                                                                                ========================================== -->
                     <article class="jme-contact-v2-office-card">
 
                         <div class="jme-contact-v2-office-detail">
@@ -329,8 +658,8 @@
 
 
                     <!-- =========================================
-                             REGISTERED OFFICE
-                        ========================================== -->
+                                                                                                                     REGISTERED OFFICE
+                                                                                                                ========================================== -->
                     <article class="jme-contact-v2-office-card">
 
                         <div class="jme-contact-v2-office-detail">
@@ -385,8 +714,8 @@
 
 
         <!-- =====================================================
-                 CONTACT FORM
-            ====================================================== -->
+                                                                                                         CONTACT FORM
+                                                                                                    ====================================================== -->
         <section class="jme-contact-v2-form-section">
 
             <div class="jme-contact-v2-container">
@@ -481,41 +810,81 @@
                     <!-- FORM RIGHT -->
                     <div class="jme-contact-v2-form-area">
 
-                        <form>
+                        <form action="{{ route('contact_us_store') }}" method="POST">
+
+                            @csrf
 
                             <div class="jme-contact-v2-field-grid">
 
-                                <input type="text" placeholder="Full Name *">
+                                <input type="text" name="full_name" placeholder="Full Name *" required>
 
-                                <input type="email" placeholder="Email Address *">
+                                <input type="email" name="email" placeholder="Email Address *" required>
 
-                                <input type="tel" placeholder="Phone Number *">
+                                <input type="text" name="mobile" maxlength="10" placeholder="Phone Number *"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
 
-                                <input type="text" placeholder="Subject *">
+                                <input type="text" name="subject" placeholder="Subject *" required>
 
                             </div>
 
+                            <textarea name="message" placeholder="Your Message *" required></textarea>
+                            <div class="form-group {{ $errors->has('captcha') ? 'has-error' : '' }}">
 
-                            <textarea placeholder="Your Message *"></textarea>
+                                <div class="jme-captcha-wrap">
 
+                                    <div class="jme-captcha-image">
+                                        <span>{!! captcha_img() !!}</span>
+                                    </div>
+
+                                    <button type="button" class="jme-captcha-reload" id="reload"
+                                        aria-label="Refresh captcha" title="Refresh Captcha">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+
+                                            <path d="M20 6v6h-6"></path>
+                                            <path d="M4 18v-6h6"></path>
+                                            <path d="M18.5 9a7 7 0 0 0-11.7-2.6L4 9"></path>
+                                            <path d="M5.5 15a7 7 0 0 0 11.7 2.6L20 15"></path>
+
+                                        </svg>
+
+                                    </button>
+
+                                </div>
+
+                                <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha"
+                                    name="captcha" autocomplete="off" required>
+
+                                @if ($errors->has('captcha'))
+                                    <span class="help-block captcha-error">
+                                        {{ $errors->first('captcha') }}
+                                    </span>
+                                @endif
+
+                            </div>
 
                             <div class="jme-contact-v2-form-bottom">
-                                <a href="about.html" class="jme-btn">
+
+                                <button type="submit" class="jme-btn">
 
                                     <span class="jme-btn-text">
                                         Send Message
                                     </span>
 
                                     <span class="jme-btn-icon">
+
                                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
                                             stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                             stroke-linejoin="round" aria-hidden="true">
                                             <path d="M5 12h14"></path>
                                             <path d="M13 6l6 6-6 6"></path>
                                         </svg>
+
                                     </span>
 
-                                </a>
+                                </button>
 
 
                                 <p>
@@ -530,7 +899,6 @@
 
                     </div>
 
-
                 </div>
 
             </div>
@@ -543,4 +911,45 @@
 
 @endsection
 @section('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            $('#reload').on('click', function(e) {
+                e.preventDefault();
+
+                let button = $(this);
+
+                button.prop('disabled', true);
+                button.addClass('captcha-loading');
+
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ route('refresh_captcha') }}',
+                    cache: false,
+
+                    success: function(data) {
+
+                        $('.jme-captcha-image span').html(data.captcha);
+
+                        $('#captcha').val('');
+
+                        button.prop('disabled', false);
+                        button.removeClass('captcha-loading');
+                    },
+
+                    error: function(xhr) {
+
+                        console.log(xhr.responseText);
+
+                        button.prop('disabled', false);
+                        button.removeClass('captcha-loading');
+                    }
+                });
+
+            });
+
+        });
+    </script>
 @endsection

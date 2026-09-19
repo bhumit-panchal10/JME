@@ -187,9 +187,7 @@ class PhotoGalleryController extends Controller
                     . $image->getClientOriginalExtension();
 
 
-                $destinationPath =
-                    public_path('photo-gallery');
-
+               $destinationPath = FolderPath('photo-gallery');
 
                 /*
                 |--------------------------------------------------------------------------
@@ -258,12 +256,6 @@ class PhotoGalleryController extends Controller
                     'required',
                     'exists:categories,id'
                 ],
-
-                /*
-                |--------------------------------------------------------------------------
-                | Service must belong to selected Category
-                |--------------------------------------------------------------------------
-                */
                 'service_id' => [
                     'required',
 
@@ -312,12 +304,6 @@ class PhotoGalleryController extends Controller
 
 
         try {
-
-            /*
-            |--------------------------------------------------------------------------
-            | Edit always using Primary Key
-            |--------------------------------------------------------------------------
-            */
             $photoGallery =
                 PhotoGallery::where(
                     'id',
@@ -332,27 +318,11 @@ class PhotoGalleryController extends Controller
                 $request->service_id;
 
 
-            /*
-            |--------------------------------------------------------------------------
-            | Replace Image
-            |--------------------------------------------------------------------------
-            */
             if ($request->hasFile('image')) {
 
-
-                /*
-                |--------------------------------------------------------------------------
-                | Unlink Old Image
-                |--------------------------------------------------------------------------
-                */
                 if (!empty($photoGallery->image)) {
 
-                    $oldImagePath =
-                        public_path(
-                            'photo-gallery/'
-                                . $photoGallery->image
-                        );
-
+                    $oldImagePath = FolderPath('photo-gallery') . '/' . $photoGallery->image;
 
                     if (
                         File::exists(
@@ -365,13 +335,6 @@ class PhotoGalleryController extends Controller
                         );
                     }
                 }
-
-
-                /*
-                |--------------------------------------------------------------------------
-                | Upload New Image
-                |--------------------------------------------------------------------------
-                */
                 $image =
                     $request->file('image');
 
@@ -384,11 +347,7 @@ class PhotoGalleryController extends Controller
                     . $image->getClientOriginalExtension();
 
 
-                $destinationPath =
-                    public_path(
-                        'photo-gallery'
-                    );
-
+                $destinationPath = FolderPath('photo-gallery');
 
                 if (!File::exists($destinationPath)) {
 
@@ -398,7 +357,6 @@ class PhotoGalleryController extends Controller
                         true
                     );
                 }
-
 
                 $image->move(
                     $destinationPath,
@@ -464,12 +422,7 @@ class PhotoGalleryController extends Controller
             */
             if (!empty($photoGallery->image)) {
 
-                $imagePath =
-                    public_path(
-                        'photo-gallery/'
-                            . $photoGallery->image
-                    );
-
+                $imagePath = FolderPath('photo-gallery') . '/' . $photoGallery->image;
 
                 if (
                     File::exists(
@@ -557,12 +510,7 @@ class PhotoGalleryController extends Controller
                 */
                 if (!empty($photoGallery->image)) {
 
-                    $imagePath =
-                        public_path(
-                            'photo-gallery/'
-                                . $photoGallery->image
-                        );
-
+                   $imagePath = FolderPath('photo-gallery') . '/' . $photoGallery->image;
 
                     if (
                         File::exists(

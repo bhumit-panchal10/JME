@@ -7,16 +7,12 @@
         <!-- Dark overlay -->
         <div class="jme-inner-overlay"></div>
 
-        <!-- Decorative left lines -->
-        <span class="jme-deco-line deco-line-1"></span>
-        <span class="jme-deco-line deco-line-2"></span>
-
         <div class="container">
             <div class="jme-inner-content">
 
                 <!-- =========================
-                                 WHITE CONTENT CARD
-                            ========================== -->
+                                         WHITE CONTENT CARD
+                                    ========================== -->
                 <div class="jme-inner-card">
 
                     <div class="jme-card-tag">
@@ -29,7 +25,7 @@
                     <!-- Breadcrumb -->
                     <div class="jme-custom-breadcrumb">
 
-                        <a href="index.html" class="jme-home-link">
+                        <a href="{{ route('index') }}" class="jme-home-link">
 
                             <span class="jme-home-box">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
@@ -86,8 +82,8 @@
 
 
         <!-- =========================
-                         BOTTOM NAVY STRIP
-                    ========================== -->
+                                 BOTTOM NAVY STRIP
+                            ========================== -->
         <div class="jme-bottom-strip">
 
             <span class="bottom-green-shape"></span>
@@ -108,8 +104,8 @@
 
 
         <!-- =====================================================
-                 ABOUT JME - ENGINEERING CROSS SECTION
-            ====================================================== -->
+                         ABOUT JME - ENGINEERING CROSS SECTION
+                    ====================================================== -->
 
         <section class="jme-about-x" id="jmeAboutX">
 
@@ -118,14 +114,14 @@
                 <div class="about-x-shell">
 
                     <!-- =============================================
-                             IMAGE ZONE
-                        ============================================== -->
+                                     IMAGE ZONE
+                                ============================================== -->
 
                     <div class="about-x-visual">
 
                         <div class="about-x-image-main">
 
-                            <img src="{{ asset('assets/front/images/about.jpg') }}" alt="JME Industrial EPC Project">
+                            <img src="{{ asset('front/images/about.jpg') }}" alt="JME Industrial EPC Project">
 
                         </div>
 
@@ -145,8 +141,8 @@
 
 
                     <!-- =============================================
-                             CONTENT
-                        ============================================== -->
+                                     CONTENT
+                                ============================================== -->
 
                     <div class="about-x-content">
 
@@ -183,8 +179,8 @@
 
 
                         <!-- =========================================
-                                 ENGINEERING RAIL
-                            ========================================== -->
+                                         ENGINEERING RAIL
+                                    ========================================== -->
 
 
                         <div class="about-x-rail">
@@ -210,44 +206,7 @@
 
                         </div>
 
-                        <!-- =========================================
-                                 BOTTOM
-                            ========================================== -->
-
-                        <div class="about-x-bottom">
-
-                            <a href="about.html" class="jme-btn">
-
-                                <span class="jme-btn-text">
-                                    Know More About JME
-                                </span>
-
-                                <span class="jme-btn-icon">
-                                    →
-                                </span>
-
-                            </a>
-
-
-                            <div class="about-x-signature">
-
-                                <span class="about-x-signature-line"></span>
-
-                                <div>
-
-                                    <small>
-                                        OUR APPROACH
-                                    </small>
-
-                                    <strong>
-                                        Concept → Execution
-                                    </strong>
-
-                                </div>
-
-                            </div>
-
-                        </div>
+                    
 
                     </div>
 
@@ -260,16 +219,16 @@
 
 
         <!-- =========================================
-                 VISION & MISSION
-            ========================================== -->
+                         VISION & MISSION
+                    ========================================== -->
         <section class="about-profile-vm">
             <div class="container">
 
                 <div class="about-profile-vm-grid">
 
                     <!-- =========================
-                             VISION
-                        ========================== -->
+                                     VISION
+                                ========================== -->
                     <article class="about-profile-vm-card about-profile-vision">
 
                         <div class="about-profile-vm-top">
@@ -332,8 +291,8 @@
 
 
                     <!-- =========================
-                             MISSION
-                        ========================== -->
+                                     MISSION
+                                ========================== -->
                     <article class="about-profile-vm-card about-profile-mission">
 
                         <div class="about-profile-vm-top">
@@ -405,8 +364,8 @@
 
 
         <!-- =========================================
-                 WHY CHOOSE US - NEW DESIGN
-            ========================================== -->
+                         WHY CHOOSE US - NEW DESIGN
+                    ========================================== -->
         <section class="about-strength-section">
             <div class="container">
 

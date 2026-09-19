@@ -20,6 +20,7 @@ class Blog extends Model
         'meta_tittle',
         'meta_description',
         'head',
+        'image',
         'body',
     ];
 

@@ -1,3 +1,27 @@
+<style>
+  
+    .jme-bdx-share-card {
+       position: relative !important;
+    padding: 19px 0px !important;
+     background: none !important; 
+     border:0px !important; 
+     border-radius: 0px !important@; 
+     overflow: hidden; 
+     box-shadow:none !important; 
+}
+.jme-bdx-share-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 18px;
+    width: 38px;
+    height: 3px;
+    background: var(--color-green);
+    border-radius: 0 0 4px 4px;
+    display: none !important;
+}
+
+</style>
 <footer class="jme-footer">
 
     <div class="jme-container footer-cta-container">
@@ -18,7 +42,7 @@
             </div>
 
 
-            <a href="contact.html" class="jme-btn footer-cta-static-btn">
+            <a href="{{route('contactus')}}" class="jme-btn footer-cta-static-btn">
 
                 <span class="jme-btn-text">
                     Start a Project
@@ -45,9 +69,9 @@
             <div class="footer-grid">
                 <div class="footer-brand">
 
-                    <a href="index.html" class="footer-logo">
+                    <a href="{{route('index')}}" class="footer-logo">
 
-                        <img src="{{ asset('assets/front/images/logo.png') }}" alt="Jay Mahakal Enterprise Group">
+                        <img src="{{ asset('front/images/logo.png') }}" alt="Jay Mahakal Enterprise Group">
 
                     </a>
 
@@ -72,6 +96,60 @@
                     <span class="footer-brand-caption">
                         JME GROUP • COMPLETE ENGINEERING SOLUTIONS
                     </span>
+                      <!-- SHARE CARD -->
+                            <div class="jme-bdx-share-card">
+
+                                <div class="jme-bdx-share-socials">
+
+                                    <!-- Facebook -->
+                                    <a href="#" class="share-facebook" aria-label="Facebook">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path
+                                                d="M14 8h3V4.5c-.5-.1-2-.2-3.3-.2-3.2 0-5.4 2-5.4 5.6V13H5v4h3.3v7h4.1v-7h3.4l.6-4h-4v-2.7C12.4 9.1 12.8 8 14 8z">
+                                            </path>
+                                        </svg>
+                                    </a>
+
+
+                                    <!-- LinkedIn -->
+                                    <a href="#" class="share-linkedin" aria-label="LinkedIn">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <rect x="4" y="9" width="3.5" height="11"></rect>
+                                            <circle cx="5.75" cy="5.5" r="1.75"></circle>
+                                            <path
+                                                d="M11 20V9h3.4v1.6c.9-1.2 2.1-2 4-2 3 0 4.6 2 4.6 5.5V20h-3.6v-5.2c0-1.7-.7-2.8-2.1-2.8-1.4 0-2.3 1-2.3 2.8V20z">
+                                            </path>
+                                        </svg>
+                                    </a>
+
+
+                                    <!-- Instagram -->
+                                    <a href="#" class="share-instagram" aria-label="Instagram">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+
+                                            <circle cx="12" cy="12" r="4"></circle>
+
+                                            <circle cx="17.5" cy="6.5" r="1" class="insta-dot"></circle>
+                                        </svg>
+                                    </a>
+
+
+                                    <!-- YouTube -->
+                                    <a href="#" class="share-youtube" aria-label="YouTube">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+
+                                            <rect x="2.5" y="6" width="19" height="12" rx="4"
+                                                class="youtube-box"></rect>
+
+                                            <path d="M10 9l5 3-5 3z" class="youtube-play"></path>
+
+                                        </svg>
+                                    </a>
+
+                                </div>
+
+                            </div>
 
                 </div>
                 <div class="footer-column">
@@ -90,13 +168,13 @@
                     <ul class="footer-links">
 
                         <li>
-                            <a href="index.html">
+                            <a href="{{ route('index') }}">
                                 <span>Home</span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="about-us.html">
+                            <a href="{{ route('about') }}">
                                 <span>About</span>
                             </a>
                         </li>
@@ -104,24 +182,24 @@
 
 
                         <li>
-                            <a href="photo-gallery.html">
+                            <a href="{{ route('photogallery') }}">
                                 <span>Photo Gallery</span>
                             </a>
                         </li>
                         <li>
-                            <a href="video-gallery.html">
+                            <a href="{{ route('videogallery') }}">
                                 <span>Video Gallery</span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="blog.html">
+                            <a href="{{ route('blog') }}">
                                 <span>Blog</span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="contact.html">
+                            <a href="{{ route('contactus') }}">
                                 <span>Contact</span>
                             </a>
                         </li>
@@ -141,42 +219,26 @@
                         </h3>
 
                     </div>
+                    
+                        @php
+                            $categories = \App\Models\Category::orderBy('id', 'asc')->take(6)->get();
+                        @endphp
 
+                        <ul class="footer-links footer-service-links">
 
-                    <ul class="footer-links footer-service-links">
+                            @foreach ($categories as $category)
+                                <li>
+                                    <a href="{{ url('service/' . $category->slugname) }}">
 
-                        <li>
-                            <a href="service.html">
-                                <span>Piping Solutions</span>
-                            </a>
-                        </li>
+                                        <span class="service-dropdown-name">
+                                            {{ $category->name }}
+                                        </span>
 
-                        <li>
-                            <a href="service.html">
-                                <span>Electrical Solutions</span>
-                            </a>
-                        </li>
+                                    </a>
+                                </li>
+                            @endforeach
 
-                        <li>
-                            <a href="service.html">
-                                <span>Passive Network</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="service.html">
-                                <span>Fire Protection</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="service.html">
-                                <span>Turnkey EPC Solutions</span>
-                            </a>
-                        </li>
-
-                    </ul>
-
+                        </ul>
                 </div>
                 <div class="footer-column footer-contact-column">
 

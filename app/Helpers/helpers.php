@@ -15,6 +15,6 @@ function FolderPath($folderName)
     if ($_SERVER['SERVER_NAME'] == "127.0.0.1") {
         return $_SERVER['DOCUMENT_ROOT'] . '/' . $folderName;
     } else {
-        return $_SERVER['DOCUMENT_ROOT'] . '/Labix/' . $folderName;
+       return $_SERVER['DOCUMENT_ROOT'] . '/' . $folderName;
     }
 }

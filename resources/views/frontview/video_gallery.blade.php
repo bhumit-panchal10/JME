@@ -1,7 +1,7 @@
 @extends('layouts.front')
-@section('title', 'Blog')
+@section('title', 'Video Gallery')
 @section('content')
-    <style>
+<style>
         .jme-blog-pagination-wrap {
             width: 100%;
             margin-top: 40px;
@@ -82,21 +82,19 @@
             }
         }
     </style>
-
-    <!-- =========================================
-                                     JME ABOUT BREADCRUMB / INNER HERO
-                                ========================================= -->
     <section class="jme-inner-hero">
 
         <!-- Dark overlay -->
         <div class="jme-inner-overlay"></div>
 
+
+
         <div class="container">
             <div class="jme-inner-content">
 
                 <!-- =========================
-                                                 WHITE CONTENT CARD
-                                            ========================== -->
+                                     WHITE CONTENT CARD
+                                ========================== -->
                 <div class="jme-inner-card">
 
                     <div class="jme-card-tag">
@@ -104,7 +102,7 @@
                         <span>JME GROUP</span>
                     </div>
 
-                    <h1>Blog</h1>
+                    <h1> Video Gallery</h1>
 
                     <!-- Breadcrumb -->
                     <div class="jme-custom-breadcrumb">
@@ -133,7 +131,7 @@
 
                         <span class="jme-current-page">
                             <span class="current-dot"></span>
-                            Blog
+                            Video Gallery
                         </span>
 
                     </div>
@@ -166,8 +164,8 @@
 
 
         <!-- =========================
-                                         BOTTOM NAVY STRIP
-                                    ========================== -->
+                             BOTTOM NAVY STRIP
+                        ========================== -->
         <div class="jme-bottom-strip">
 
             <span class="bottom-green-shape"></span>
@@ -187,163 +185,57 @@
 
 
     <!-- =====================================================
-                                     JME LATEST INSIGHTS
-                                ====================================================== -->
+                         SIMPLE YOUTUBE VIDEO GALLERY
+                    ====================================================== -->
 
-    <section class="jme-latest-insights" id="latestInsights">
+    <section class="jme-simple-video-gallery">
 
         <div class="jme-container">
 
-            <!-- =============================================
-                                             SECTION HEADER
-                                        ============================================== -->
-            <div class="jme-latest-head">
+            @if (isset($video_gallery) && $video_gallery->isNotEmpty())
 
-                <div>
+                <div class="jme-simple-video-grid">
 
-                    <div class="jme-latest-kicker">
+                    @foreach ($video_gallery as $video)
+                        @php
+                            $videoId = null;
 
-                        <span class="jme-latest-kicker-icon">
+                            if (!empty($video->url)) {
+                                if (preg_match('/[?&]v=([^&]+)/', $video->url, $matches)) {
+                                    $videoId = $matches[1];
+                                } elseif (preg_match('/youtu\.be\/([^?&]+)/', $video->url, $matches)) {
+                                    $videoId = $matches[1];
+                                } elseif (preg_match('/youtube\.com\/shorts\/([^?&]+)/', $video->url, $matches)) {
+                                    $videoId = $matches[1];
+                                } elseif (preg_match('/youtube\.com\/embed\/([^?&]+)/', $video->url, $matches)) {
+                                    $videoId = $matches[1];
+                                }
+                            }
+                        @endphp
 
-                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M5 4h14v16H5z"></path>
-                                <path d="M8 8h8"></path>
-                                <path d="M8 12h8"></path>
-                                <path d="M8 16h5"></path>
-                            </svg>
+                        @if ($videoId)
+                            <div class="jme-simple-video-item">
 
-                        </span>
-
-                        <span>
-                            JME GROUP BLOG
-                        </span>
-
-                    </div>
-
-
-                    <h2>
-                        Engineering
-                        <span>
-                            Insights.
-                        </span>
-                    </h2>
-
-                </div>
-
-
-                <div class="jme-latest-head-right">
-
-                    <p>
-                        Explore engineering knowledge, project insights,
-                        technical guidance and industry updates from
-                        Jay Mahakal Enterprise Group.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =============================================
-                                             BLOG GRID
-                                        ============================================== -->
-
-            <div class="jme-blog-grid">
-
-                @forelse ($blogs as $key => $blog)
-                    @php
-                        $wordCount = str_word_count(strip_tags($blog->description ?? ''));
-
-                        $readTime = max(1, ceil($wordCount / 200));
-                    @endphp
-
-                    <article class="jme-insight-card {{ $key == 1 ? 'jme-insight-card-alt' : '' }}">
-
-                        <a href="{{ url('blog-detail/' . $blog->slugname) }}" class="jme-insight-image">
-
-                            @if (!empty($blog->image))
-                                <img src="{{ asset('blogs/' . $blog->image) }}" alt="{{ $blog->name }}">
-                            @endif
-
-                            <span class="jme-insight-image-cut"></span>
-
-                            <span class="jme-insight-date">
-
-                                <strong>
-                                    {{ $blog->created_at->format('d') }}
-                                </strong>
-
-                                <small>
-                                    {{ strtoupper($blog->created_at->format('M')) }}
-                                </small>
-
-                            </span>
-
-                        </a>
-
-
-                        <div class="jme-insight-body">
-
-                            <div class="jme-insight-top">
-
-                                <span class="jme-insight-category">
-                                    {{ strtoupper($blog->category->name ?? '') }}
-                                </span>
+                                <iframe src="https://www.youtube.com/embed/{{ $videoId }}"
+                                    title="{{ $video->service->name ?? 'Service Video' }}" loading="lazy"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen>
+                                </iframe>
 
                             </div>
+                        @endif
+                    @endforeach
 
-
-                            <h3>
-
-                                <a href="{{ url('blog-detail/' . $blog->slugname) }}">
-                                    {{ $blog->name }}
-                                </a>
-
-                            </h3>
-
-
-                            <p>
-
-                                {{ \Illuminate\Support\Str::limit(strip_tags($blog->description), 150) }}
-
-                            </p>
-
-
-                            <div class="jme-insight-bottom">
-
-                             
-
-                                <a href="{{ url('blog-detail/' . $blog->slugname) }}" class="jme-insight-link">
-
-                                    Read Insight
-
-                                    <i>↗</i>
-
-                                </a>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-                @empty
-
-                    <div class="jme-blog-no-result">
-                        No blogs found.
-                    </div>
-                @endforelse
-
-            </div>
-            @if ($blogs->hasPages())
+                </div>
+                
+                 @if ($video_gallery->hasPages())
 
                 <div class="jme-blog-pagination-wrap">
 
                     <div class="jme-blog-pagination">
 
                         {{-- PREVIOUS --}}
-                        @if ($blogs->onFirstPage())
+                        @if ($video_gallery->onFirstPage())
                             <button type="button" class="jme-pagination-control" disabled>
 
                                 <svg viewBox="0 0 24 24">
@@ -353,7 +245,7 @@
 
                             </button>
                         @else
-                            <a href="{{ $blogs->previousPageUrl() }}" class="jme-pagination-control">
+                            <a href="{{ $video_gallery->previousPageUrl() }}" class="jme-pagination-control">
 
                                 <svg viewBox="0 0 24 24">
                                     <path d="M19 12H5"></path>
@@ -367,10 +259,10 @@
                         {{-- PAGE NUMBERS --}}
                         <div class="jme-pagination-numbers">
 
-                            @foreach ($blogs->getUrlRange(1, $blogs->lastPage()) as $page => $url)
+                            @foreach ($video_gallery->getUrlRange(1, $video_gallery->lastPage()) as $page => $url)
                                 <a href="{{ $url }}"
                                     class="jme-pagination-page
-                        {{ $page == $blogs->currentPage() ? 'active' : '' }}">
+                        {{ $page == $video_gallery->currentPage() ? 'active' : '' }}">
                                     {{ $page }}
                                 </a>
                             @endforeach
@@ -379,8 +271,8 @@
 
 
                         {{-- NEXT --}}
-                        @if ($blogs->hasMorePages())
-                            <a href="{{ $blogs->nextPageUrl() }}" class="jme-pagination-control">
+                        @if ($video_gallery->hasMorePages())
+                            <a href="{{ $video_gallery->nextPageUrl() }}" class="jme-pagination-control">
 
                                 <svg viewBox="0 0 24 24">
                                     <path d="M5 12h14"></path>
@@ -405,9 +297,12 @@
 
             @endif
 
+            @endif
+
         </div>
 
     </section>
+
 
 @endsection
 @section('scripts')

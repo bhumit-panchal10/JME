@@ -1,3 +1,28 @@
+<style>
+    .jme-menu > li > a.active {
+    color: #59b947;
+    font-weight: 700;
+}
+
+.jme-menu > li > a.active::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* Dropdown active item */
+.jme-dropdown li a.active {
+    color: #59b947;
+    background: rgba(89, 185, 71, 0.08);
+}
+
+
+/* Contact active */
+.jme-btn.active {
+    background: #59b947;
+    color: #fff;
+}
+</style>
 <div class="jme-topbar">
 
     <div class="jme-container">
@@ -76,9 +101,9 @@
     <div class="jme-container">
 
         <div class="header-inner">
-            <a href="index.html" class="jme-logo" aria-label="JME Group Home">
+            <a href="{{route('index')}}" class="jme-logo" aria-label="JME Group Home">
 
-                <img src="{{ asset('assets/front/images/logo.png') }}" alt="Jay Mahakal Enterprise Group Logo">
+                <img src="{{ asset('front/images/logo.png') }}" alt="Jay Mahakal Enterprise Group Logo">
 
             </a>
             <button type="button" class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Menu"
@@ -94,179 +119,134 @@
 
             <nav class="jme-navigation" id="jmeNavigation">
 
-                <ul class="jme-menu">
-                    <li>
-                        <a href="{{ route('index') }}" class="active">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('about') }}">
-                            About
-                        </a>
-                    </li>
-                    <li class="has-dropdown service-menu">
+              <ul class="jme-menu">
 
-                        <a href="{{ route('service') }}" class="dropdown-toggle">
+        {{-- HOME --}}
+        <li>
+            <a href="{{ route('index') }}"
+                class="{{ request()->routeIs('index') ? 'active' : '' }}">
+                Home
+            </a>
+        </li>
 
-                            <span>
-                                Services
+
+        {{-- ABOUT --}}
+        <li>
+            <a href="{{ route('about') }}"
+                class="{{ request()->routeIs('about') ? 'active' : '' }}">
+                About
+            </a>
+        </li>
+
+
+        {{-- CATEGORY --}}
+        <li class="has-dropdown service-menu">
+            <a href="#"
+                class="dropdown-toggle
+                {{ request()->is('service/*') || request()->routeIs('servicedetail') ? 'active' : '' }}">
+            
+                <span>Category</span>
+                <span class="dropdown-arrow"></span>
+            
+            </a>
+
+            @php
+                $categories = \App\Models\Category::orderBy('id', 'asc')->get();
+            @endphp
+
+            <ul class="jme-dropdown service-dropdown">
+
+                @foreach ($categories as $category)
+                    <li>
+                        <a href="{{ url('service/' . $category->slugname) }}"
+                            class="{{ request()->is('service/' . $category->slugname) ? 'active' : '' }}">
+
+                            <span class="service-dropdown-name">
+                                {{ $category->name }}
                             </span>
 
-                            <span class="dropdown-arrow"></span>
-
                         </a>
-                        <ul class="jme-dropdown service-dropdown">
-
-                            <li>
-                                <a href="service.html">
-
-
-
-                                    <span class="service-dropdown-name">
-                                        Piping Solutions
-                                    </span>
-
-                                </a>
-                            </li>
-
-
-                            <!-- ELECTRICAL -->
-
-                            <li>
-                                <a href="service.html">
-
-
-
-                                    <span class="service-dropdown-name">
-                                        Electrical Solutions
-                                    </span>
-
-                                </a>
-                            </li>
-
-
-                            <!-- PASSIVE NETWORK -->
-
-                            <li>
-                                <a href="service.html">
-
-
-                                    <span class="service-dropdown-name">
-                                        Passive Network Solutions
-                                    </span>
-
-                                </a>
-                            </li>
-
-
-                            <!-- TURNKEY -->
-
-                            <li>
-                                <a href="service.html">
-
-
-
-                                    <span class="service-dropdown-name">
-                                        Turnkey Project Solutions
-                                    </span>
-
-                                </a>
-                            </li>
-
-
-                            <!-- FIRE -->
-
-                            <li>
-                                <a href="service.html">
-
-
-
-                                    <span class="service-dropdown-name">
-                                        Fire Protection System
-                                    </span>
-
-                                </a>
-                            </li>
-
-                        </ul>
-
                     </li>
+                @endforeach
 
-                    <li class="has-dropdown">
+            </ul>
 
-                        <a href="#" class="dropdown-toggle">
-
-                            <span>
-                                Gallery
-                            </span>
-
-                            <span class="dropdown-arrow"></span>
-
-                        </a>
+        </li>
 
 
-                        <!-- DROPDOWN -->
+        {{-- GALLERY --}}
+        <li class="has-dropdown">
 
-                        <ul class="jme-dropdown">
+            <a href="#"
+                class="dropdown-toggle {{ request()->routeIs('photogallery', 'videogallery') ? 'active' : '' }}">
 
+                <span>Gallery</span>
 
-                            <!-- PHOTO GALLERY -->
+                <span class="dropdown-arrow"></span>
+            </a>
 
-                            <li>
+            <ul class="jme-dropdown">
 
-                                <a href="photo-gallery.html">
-                                    Photo Gallery
-                                </a>
+                <li>
+                    <a href="{{ route('photogallery') }}"
+                        class="{{ request()->routeIs('photogallery') ? 'active' : '' }}">
+                        Photo Gallery
+                    </a>
+                </li>
 
-                            </li>
+                <li>
+                    <a href="{{ route('videogallery') }}"
+                        class="{{ request()->routeIs('videogallery') ? 'active' : '' }}">
+                        Video Gallery
+                    </a>
+                </li>
 
+            </ul>
 
-
-                            <!-- VIDEO GALLERY -->
-
-                            <li>
-
-                                <a href="video-gallery.html">
-                                    Video Gallery
-                                </a>
-
-                            </li>
-
-
-                        </ul>
-
-                    </li>
-
+        </li>
 
 
-                    <!-- BLOG -->
+        {{-- BLOG --}}
+        <li>
+            <a href="{{ route('blog') }}"
+               class="{{ request()->routeIs('blog', 'blogdetail') ? 'active' : '' }}">
+                Blog
+            </a>
+        </li>
 
-                    <li>
-
-                        <a href="{{ route('blog') }}">
-                            Blog
-                        </a>
-
-                    </li>
-
-
-                </ul>
-
-                <a href="{{ route('contactus') }}" class="jme-btn">
-                    <span class="jme-btn-text">Contact Us</span>
-
-                    <span class="jme-btn-icon">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M5 12h14"></path>
-                            <path d="M13 6l6 6-6 6"></path>
-                        </svg>
-                    </span>
-                </a>
+    </ul>
 
 
-            </nav>
+            {{-- CONTACT --}}
+            <a href="{{ route('contactus') }}"
+            class="jme-btn">
+        
+                <span class="jme-btn-text">
+                    Contact Us
+                </span>
+        
+                <span class="jme-btn-icon">
+        
+                    <svg viewBox="0 0 24 24"
+                        width="18"
+                        height="18"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true">
+        
+                        <path d="M5 12h14"></path>
+                        <path d="M13 6l6 6-6 6"></path>
+        
+                    </svg>
+        
+                </span>
+        
+            </a>
+
+           </nav>
 
         </div>
 

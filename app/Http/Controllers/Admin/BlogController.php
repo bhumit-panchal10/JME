@@ -80,7 +80,7 @@ class BlogController extends Controller
                     'required',
                     'exists:categories,id'
                 ],
-
+                
                 'image' => [
                     'nullable',
                     'image',
@@ -104,13 +104,13 @@ class BlogController extends Controller
                         }
                     ),
                 ],
-
+                
                 'image.image' =>
                 'Please select a valid image.',
-
+                
                 'image.mimes' =>
                 'Image must be JPG, JPEG, PNG, WEBP or GIF.',
-
+                
                 'image.max' =>
                 'Image size may not be greater than 2 MB.',
 
@@ -205,34 +205,34 @@ class BlogController extends Controller
 
             $blog->body =
                 $request->body;
-
+                
             if ($request->hasFile('image')) {
 
                 $image = $request->file('image');
-
+            
                 $imageName =
                     time()
                     . '_'
                     . Str::random(6)
                     . '.'
                     . $image->getClientOriginalExtension();
-
+            
                 $destinationPath = FolderPath('blogs');
-
+            
                 if (!File::exists($destinationPath)) {
-
+            
                     File::makeDirectory(
                         $destinationPath,
                         0755,
                         true
                     );
                 }
-
+            
                 $image->move(
                     $destinationPath,
                     $imageName
                 );
-
+            
                 $blog->image = $imageName;
             }
 
@@ -313,7 +313,7 @@ class BlogController extends Controller
                     'required',
                     'exists:categories,id'
                 ],
-
+                
                 'image' => [
                     'nullable',
                     'image',
@@ -391,13 +391,13 @@ class BlogController extends Controller
 
                 'meta_tittle.max' =>
                 'Meta title may not be greater than 255 characters.',
-
+                
                 'image.image' =>
                 'Please select a valid image.',
-
+                
                 'image.mimes' =>
                 'Image must be JPG, JPEG, PNG, WEBP or GIF.',
-
+                
                 'image.max' =>
                 'Image size may not be greater than 2 MB.',
             ]
@@ -442,7 +442,7 @@ class BlogController extends Controller
 
             $blog->body =
                 $request->body;
-
+                
             if ($request->hasFile('image')) {
 
                 /*
@@ -451,47 +451,47 @@ class BlogController extends Controller
                 |--------------------------------------------------------------------------
                 */
                 if (!empty($blog->image)) {
-
+            
                     $oldImagePath =
                         FolderPath('blogs') . '/' . $blog->image;
-
+            
                     if (File::exists($oldImagePath)) {
                         File::delete($oldImagePath);
                     }
                 }
 
 
-                /*
+            /*
             |--------------------------------------------------------------------------
             | Upload New Image
             |--------------------------------------------------------------------------
             */
-                $image = $request->file('image');
-
-                $imageName =
-                    time()
-                    . '_'
-                    . Str::random(6)
-                    . '.'
-                    . $image->getClientOriginalExtension();
-
-                $destinationPath =
-                    FolderPath('blogs');
-
-                if (!File::exists($destinationPath)) {
-
-                    File::makeDirectory(
-                        $destinationPath,
-                        0755,
-                        true
-                    );
-                }
+            $image = $request->file('image');
+        
+            $imageName =
+                time()
+                . '_'
+                . Str::random(6)
+                . '.'
+                . $image->getClientOriginalExtension();
+        
+            $destinationPath =
+                FolderPath('blogs');
+        
+            if (!File::exists($destinationPath)) {
+        
+                File::makeDirectory(
+                    $destinationPath,
+                    0755,
+                    true
+                );
+            }
 
                 $image->move(
                     $destinationPath,
                     $imageName
                 );
-
+            
                 $blog->image = $imageName;
             }
 

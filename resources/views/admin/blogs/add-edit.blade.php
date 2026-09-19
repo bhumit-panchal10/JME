@@ -166,36 +166,43 @@
                                     @endif
 
                                 </div>
-
+                                
                                 {{-- ========================================== --}}
                                 {{-- IMAGE --}}
                                 {{-- ========================================== --}}
-
+                                
                                 <div class="col-md-6 mb-4">
-
+                                
                                     <label class="form-label">
                                         Image
                                     </label>
-
-                                    <input type="file" name="image" class="form-control"
-                                        accept=".jpg,.jpeg,.png,.webp,.gif">
-
+                                
+                                    <input
+                                        type="file"
+                                        name="image"
+                                        class="form-control"
+                                        accept=".jpg,.jpeg,.png,.webp,.gif"
+                                    >
+                                
                                     @if ($errors->has('image'))
                                         <span class="text-danger">
                                             {{ $errors->first('image') }}
                                         </span>
                                     @endif
-
-
+                                
+                                
                                     {{-- Existing Image On Edit --}}
                                     @if (isset($blog) && !empty($blog->image))
+                                
                                         <div class="mt-3">
-
+                                
                                             <label class="form-label d-block">
                                                 Current Image
                                             </label>
-
-                                            <img src="{{ asset('blogs/' . $blog->image) }}" alt="{{ $blog->name }}"
+                                
+                                            <img
+                                                src="{{ asset('blogs/' . $blog->image) }}"
+                                                alt="{{ $blog->name }}"
                                                 style="
                                                     width: 120px;
                                                     height: 80px;
@@ -203,11 +210,13 @@
                                                     border-radius: 6px;
                                                     border: 1px solid #ddd;
                                                     padding: 3px;
-                                                ">
-
+                                                "
+                                            >
+                                
                                         </div>
+                                
                                     @endif
-
+                                
                                 </div>
 
 

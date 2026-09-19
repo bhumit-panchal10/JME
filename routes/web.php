@@ -22,6 +22,8 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\OurClientController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\YearController;
+use App\Http\Controllers\InquiryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,12 +39,20 @@ use App\Http\Controllers\YearController;
 //     return view('errors.404'); // Make sure the view path matches your custom 404 page
 // });
 
-Route::get('/', [FrontController::class, 'index'])->name('index');
+Route::get('/index', [FrontController::class, 'index'])->name('index');
 Route::get('about-us', [FrontController::class, 'about'])->name('about');
 Route::get('blog', [FrontController::class, 'blog'])->name('blog');
 Route::get('contact-us', [FrontController::class, 'contactus'])->name('contactus');
-Route::get('service', [FrontController::class, 'service'])->name('service');
+Route::post('contact-us-store', [FrontController::class, 'contact_us_store'])->name('contact_us_store');
+Route::get('refresh_captcha', [FrontController::class, 'refreshCaptcha'])->name('refresh_captcha');
+Route::get('thank-you', [FrontController::class, 'thankyou'])->name('thankyou');
 
+
+Route::get('service/{slugname?}', [FrontController::class, 'service'])->name('service');
+Route::get('photogallery', [FrontController::class, 'photogallery'])->name('photogallery');
+Route::get('videogallery', [FrontController::class, 'videogallery'])->name('videogallery');
+Route::get('service-detail/{slugname?}', [FrontController::class, 'servicedetail'])->name('servicedetail');
+Route::get('blog-detail/{slugname?}', [FrontController::class, 'blog_detail'])->name('blogdetail');
 
 Route::get('login', fn() => redirect()->route('admin.login'))->name('login');
 
@@ -58,7 +68,10 @@ Route::middleware('guest:admin')->group(function () {
 // Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('/Inquiry', [App\Http\Controllers\InquiryController::class, 'index'])->name('Inquiry');
+Route::delete('/Inquiry', [App\Http\Controllers\InquiryController::class, 'delete'])->name('inquiry.delete');
+Route::delete('/Inquiry/multi-delete', [App\Http\Controllers\InquiryController::class, 'multiDelete'])
+    ->name('inquiry.multidelete');
 Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
     Artisan::call('view:clear');
@@ -195,6 +208,7 @@ Route::prefix('admin')->name('setting.')->middleware('auth')->group(function () 
     Route::post('/setting/update', [SettingController::class, 'update'])->name('update');
     Route::delete('/setting/delete', [SettingController::class, 'delete'])->name('delete');
 });
+
 
 //Blog Master
 Route::prefix('admin')->name('admin.')->group(function () {

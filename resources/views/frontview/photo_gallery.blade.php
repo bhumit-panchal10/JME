@@ -1,5 +1,5 @@
 @extends('layouts.front')
-@section('title', 'Blog')
+@section('title', 'Photo Gallery')
 @section('content')
     <style>
         .jme-blog-pagination-wrap {
@@ -82,21 +82,18 @@
             }
         }
     </style>
-
-    <!-- =========================================
-                                     JME ABOUT BREADCRUMB / INNER HERO
-                                ========================================= -->
     <section class="jme-inner-hero">
 
         <!-- Dark overlay -->
         <div class="jme-inner-overlay"></div>
 
+
         <div class="container">
             <div class="jme-inner-content">
 
                 <!-- =========================
-                                                 WHITE CONTENT CARD
-                                            ========================== -->
+                                                         WHITE CONTENT CARD
+                                                    ========================== -->
                 <div class="jme-inner-card">
 
                     <div class="jme-card-tag">
@@ -104,7 +101,7 @@
                         <span>JME GROUP</span>
                     </div>
 
-                    <h1>Blog</h1>
+                    <h1> Photo Gallery</h1>
 
                     <!-- Breadcrumb -->
                     <div class="jme-custom-breadcrumb">
@@ -133,7 +130,7 @@
 
                         <span class="jme-current-page">
                             <span class="current-dot"></span>
-                            Blog
+                            Photo Gallery
                         </span>
 
                     </div>
@@ -157,17 +154,14 @@
 
                 </div>
 
-
-
-
             </div>
         </div>
 
 
 
         <!-- =========================
-                                         BOTTOM NAVY STRIP
-                                    ========================== -->
+                                                 BOTTOM NAVY STRIP
+                                            ========================== -->
         <div class="jme-bottom-strip">
 
             <span class="bottom-green-shape"></span>
@@ -185,165 +179,26 @@
     </section>
 
 
-
-    <!-- =====================================================
-                                     JME LATEST INSIGHTS
-                                ====================================================== -->
-
-    <section class="jme-latest-insights" id="latestInsights">
+    <section class="jme-simple-gallery">
 
         <div class="jme-container">
 
-            <!-- =============================================
-                                             SECTION HEADER
-                                        ============================================== -->
-            <div class="jme-latest-head">
-
-                <div>
-
-                    <div class="jme-latest-kicker">
-
-                        <span class="jme-latest-kicker-icon">
-
-                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M5 4h14v16H5z"></path>
-                                <path d="M8 8h8"></path>
-                                <path d="M8 12h8"></path>
-                                <path d="M8 16h5"></path>
-                            </svg>
-
-                        </span>
-
-                        <span>
-                            JME GROUP BLOG
-                        </span>
-
+            <div class="jme-simple-gallery-grid">
+                @foreach ($photogallery as $photo)
+                    <div class="jme-simple-gallery-item">
+                        <img src="{{ asset('photo-gallery/' . $photo->image) }}" alt="Gallery Image">
                     </div>
-
-
-                    <h2>
-                        Engineering
-                        <span>
-                            Insights.
-                        </span>
-                    </h2>
-
-                </div>
-
-
-                <div class="jme-latest-head-right">
-
-                    <p>
-                        Explore engineering knowledge, project insights,
-                        technical guidance and industry updates from
-                        Jay Mahakal Enterprise Group.
-                    </p>
-
-                </div>
+                @endforeach
 
             </div>
-
-
-
-            <!-- =============================================
-                                             BLOG GRID
-                                        ============================================== -->
-
-            <div class="jme-blog-grid">
-
-                @forelse ($blogs as $key => $blog)
-                    @php
-                        $wordCount = str_word_count(strip_tags($blog->description ?? ''));
-
-                        $readTime = max(1, ceil($wordCount / 200));
-                    @endphp
-
-                    <article class="jme-insight-card {{ $key == 1 ? 'jme-insight-card-alt' : '' }}">
-
-                        <a href="{{ url('blog-detail/' . $blog->slugname) }}" class="jme-insight-image">
-
-                            @if (!empty($blog->image))
-                                <img src="{{ asset('blogs/' . $blog->image) }}" alt="{{ $blog->name }}">
-                            @endif
-
-                            <span class="jme-insight-image-cut"></span>
-
-                            <span class="jme-insight-date">
-
-                                <strong>
-                                    {{ $blog->created_at->format('d') }}
-                                </strong>
-
-                                <small>
-                                    {{ strtoupper($blog->created_at->format('M')) }}
-                                </small>
-
-                            </span>
-
-                        </a>
-
-
-                        <div class="jme-insight-body">
-
-                            <div class="jme-insight-top">
-
-                                <span class="jme-insight-category">
-                                    {{ strtoupper($blog->category->name ?? '') }}
-                                </span>
-
-                            </div>
-
-
-                            <h3>
-
-                                <a href="{{ url('blog-detail/' . $blog->slugname) }}">
-                                    {{ $blog->name }}
-                                </a>
-
-                            </h3>
-
-
-                            <p>
-
-                                {{ \Illuminate\Support\Str::limit(strip_tags($blog->description), 150) }}
-
-                            </p>
-
-
-                            <div class="jme-insight-bottom">
-
-                             
-
-                                <a href="{{ url('blog-detail/' . $blog->slugname) }}" class="jme-insight-link">
-
-                                    Read Insight
-
-                                    <i>↗</i>
-
-                                </a>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-                @empty
-
-                    <div class="jme-blog-no-result">
-                        No blogs found.
-                    </div>
-                @endforelse
-
-            </div>
-            @if ($blogs->hasPages())
+            @if ($photogallery->hasPages())
 
                 <div class="jme-blog-pagination-wrap">
 
                     <div class="jme-blog-pagination">
 
                         {{-- PREVIOUS --}}
-                        @if ($blogs->onFirstPage())
+                        @if ($photogallery->onFirstPage())
                             <button type="button" class="jme-pagination-control" disabled>
 
                                 <svg viewBox="0 0 24 24">
@@ -353,7 +208,7 @@
 
                             </button>
                         @else
-                            <a href="{{ $blogs->previousPageUrl() }}" class="jme-pagination-control">
+                            <a href="{{ $photogallery->previousPageUrl() }}" class="jme-pagination-control">
 
                                 <svg viewBox="0 0 24 24">
                                     <path d="M19 12H5"></path>
@@ -367,10 +222,10 @@
                         {{-- PAGE NUMBERS --}}
                         <div class="jme-pagination-numbers">
 
-                            @foreach ($blogs->getUrlRange(1, $blogs->lastPage()) as $page => $url)
+                            @foreach ($photogallery->getUrlRange(1, $photogallery->lastPage()) as $page => $url)
                                 <a href="{{ $url }}"
                                     class="jme-pagination-page
-                        {{ $page == $blogs->currentPage() ? 'active' : '' }}">
+                        {{ $page == $photogallery->currentPage() ? 'active' : '' }}">
                                     {{ $page }}
                                 </a>
                             @endforeach
@@ -379,8 +234,8 @@
 
 
                         {{-- NEXT --}}
-                        @if ($blogs->hasMorePages())
-                            <a href="{{ $blogs->nextPageUrl() }}" class="jme-pagination-control">
+                        @if ($photogallery->hasMorePages())
+                            <a href="{{ $photogallery->nextPageUrl() }}" class="jme-pagination-control">
 
                                 <svg viewBox="0 0 24 24">
                                     <path d="M5 12h14"></path>
@@ -409,6 +264,77 @@
 
     </section>
 
+{{-- =========================================
+    PHOTO GALLERY LIGHTBOX
+========================================= --}}
+
+<dialog class="jme-gallery-dialog" id="galleryLightbox">
+
+    <div class="jme-lightbox-box">
+
+        {{-- CLOSE BUTTON --}}
+        <button
+            type="button"
+            class="jme-lightbox-close"
+            id="lightboxClose"
+            aria-label="Close">
+
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 6l12 12M18 6L6 18"></path>
+            </svg>
+
+        </button>
+
+
+        <div class="jme-lightbox-image-wrapper">
+
+            {{-- PREVIOUS --}}
+            <button
+                type="button"
+                class="jme-lightbox-arrow jme-lightbox-prev"
+                id="lightboxPrev"
+                aria-label="Previous Image">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M15 18l-6-6 6-6"></path>
+                </svg>
+
+            </button>
+
+
+            {{-- POPUP IMAGE --}}
+            <img
+                src=""
+                alt="Gallery Preview"
+                id="lightboxImage"
+            >
+
+
+            {{-- NEXT --}}
+            <button
+                type="button"
+                class="jme-lightbox-arrow jme-lightbox-next"
+                id="lightboxNext"
+                aria-label="Next Image">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M9 6l6 6-6 6"></path>
+                </svg>
+
+            </button>
+
+
+            {{-- COUNTER --}}
+            <div
+                class="jme-lightbox-counter"
+                id="lightboxCounter">
+            </div>
+
+        </div>
+
+    </div>
+
+</dialog>
 @endsection
 @section('scripts')
 @endsection

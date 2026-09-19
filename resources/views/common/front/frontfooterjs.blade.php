@@ -1,4 +1,4 @@
-<a href="https://wa.me/919876543210" class="whatsapp-sticky" target="_blank" aria-label="Chat on WhatsApp">
+<a href="https://wa.me/919714123111" class="whatsapp-sticky" target="_blank" aria-label="Chat on WhatsApp">
 
     <svg viewBox="0 0 32 32" width="30" height="30" fill="currentColor">
         <path
@@ -10,4 +10,4 @@
          EXTERNAL JS
     ====================================================== -->
 
-<script src="{{ asset('assets/front/js/main.js') }}"></script>
+<script src="{{ asset('front/js/main.js') }}"></script>
