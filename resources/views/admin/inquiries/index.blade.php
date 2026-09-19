@@ -22,15 +22,12 @@
 
                                 <div class="d-flex justify-content-end align-items-center mb-3 gap-2">
 
-
-
                                     <button type="button" class="btn btn-danger btn-sm" id="multiDeleteBtn"
                                         data-bs-toggle="modal" data-bs-target="#multiDeleteRecordModal" disabled>
                                         <i class="fa fa-trash"></i> Delete Selected
                                     </button>
 
                                 </div>
-
 
                                 <table id="scroll-horizontal" class="table nowrap align-middle" style="width:100%">
                                     <thead>

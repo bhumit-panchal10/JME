@@ -1,26 +1,45 @@
-
 <style>
-.jme-bdx-content-block{
-    padding: 0 !important;
-} 
-.jme-bdx-recent small{
-    font-size: 10px !important;
-}
- .jme-bdx-recent h4{
-    font-size: 11px !important;
-}
-.jme-bdx-recent time
- {
-      font-size: 11px !important;
- }
-.current-dot{
-        width: 10px !important;
-    height: 9px !important;
-}
+    .jme-bdx-content-block {
+        padding: 0 !important;
+    }
 
+    .jme-bdx-recent small {
+        font-size: 10px !important;
+    }
+
+    .jme-bdx-recent h4 {
+        font-size: 11px !important;
+    }
+
+    .jme-bdx-recent time {
+        font-size: 11px !important;
+    }
+
+    .current-dot {
+        width: 10px !important;
+        height: 9px !important;
+    }
 </style>
 @extends('layouts.front')
-@section('title', 'Blog Detail')
+@section('title', config('app.name') . '' . ($meta->meta_tittle ?? ''))
+@section('opTag')
+    {{-- Meta tags --}}
+    <meta name="description" content="{{ $meta->meta_description ?? '' }}">
+    <meta name="keywords" content="{{ $meta->metaKeyword ?? '' }}">
+    <meta name="title" content="{{ $meta->meta_tittle ?? '' }}">
+@endsection
+
+@section('head')
+    {!! $meta->head ?? '' !!}
+@endsection
+
+@section('body')
+    @if (!empty($meta->body))
+        <script type="text/javascript">
+            {!! $meta->body !!}
+        </script>
+    @endif
+@endsection
 @section('content')
 
     <section class="jme-inner-hero">
@@ -32,8 +51,8 @@
             <div class="jme-inner-content">
 
                 <!-- =========================
-                                                                                                                                                                             WHITE CONTENT CARD
-                                                                                                                                                                        ========================== -->
+                                                                                                                                                                                     WHITE CONTENT CARD
+                                                                                                                                                                                ========================== -->
                 <div class="jme-inner-card">
 
                     <div class="jme-card-tag">
@@ -70,7 +89,7 @@
 
                         <span class="jme-current-page">
                             <span class="current-dot"></span>
-                             {{ $Blog->name ?? '' }}
+                            {{ $Blog->name ?? '' }}
                         </span>
 
                     </div>
@@ -103,8 +122,8 @@
 
 
         <!-- =========================
-                                                                                                                                                                     BOTTOM NAVY STRIP
-                                                                                                                                                                ========================== -->
+                                                                                                                                                                             BOTTOM NAVY STRIP
+                                                                                                                                                                        ========================== -->
         <div class="jme-bottom-strip">
 
             <span class="bottom-green-shape"></span>
@@ -124,10 +143,10 @@
 
 
     <!-- =========================================================
-                                                                                                                                                                 JME BLOG DETAIL
-                                                                                                                                                                 EXISTING HEADER / BREADCRUMB ABOVE
-                                                                                                                                                                 EXISTING RELATED BLOG SECTION BELOW
-                                                                                                                                                            ========================================================== -->
+                                                                                                                                                                         JME BLOG DETAIL
+                                                                                                                                                                         EXISTING HEADER / BREADCRUMB ABOVE
+                                                                                                                                                                         EXISTING RELATED BLOG SECTION BELOW
+                                                                                                                                                                    ========================================================== -->
 
     <main class="jme-blog-detail-x">
 
@@ -158,7 +177,7 @@
                                 <i></i>
 
 
-                           
+
 
                             </div>
 
@@ -198,8 +217,8 @@
                     </article>
 
                     <!-- =================================================
-                                                                                                                                                                                 RIGHT SIDEBAR
-                                                                                                                                                                            ================================================== -->
+                                                                                                                                                                                         RIGHT SIDEBAR
+                                                                                                                                                                                    ================================================== -->
                     <aside class="jme-bdx-sidebar">
 
                         <div class="jme-bdx-sidebar-sticky">
@@ -313,7 +332,7 @@
 
 
 
-                          
+
 
                         </div>
 

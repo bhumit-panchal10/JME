@@ -1,5 +1,23 @@
 @extends('layouts.front')
-@section('title', 'Service')
+@section('title', config('app.name') . '' . ($meta->meta_title ?? ''))
+@section('opTag')
+    {{-- Meta tags --}}
+    <meta name="description" content="{{ $meta->meta_description ?? '' }}">
+    <meta name="keywords" content="{{ $meta->metaKeyword ?? '' }}">
+    <meta name="title" content="{{ $meta->meta_title ?? '' }}">
+@endsection
+
+@section('head')
+    {!! $meta->head ?? '' !!}
+@endsection
+
+@section('body')
+    @if (!empty($meta->body))
+        <script type="text/javascript">
+            {!! $meta->body !!}
+        </script>
+    @endif
+@endsection
 @section('content')
 
     <section class="jme-inner-hero">
@@ -7,7 +25,7 @@
         <!-- Dark overlay -->
         <div class="jme-inner-overlay"></div>
 
-      
+
 
         <div class="container">
             <div class="jme-inner-content">

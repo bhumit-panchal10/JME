@@ -835,7 +835,7 @@
     .navbar-menu {
         width: 250px;
         z-index: 1002;
-         background: #e17616 !important;
+         background-color: #0b2d5c !important;
         /*background: -webkit-gradient(linear, left top, right top, from(#3f7c2a), to(#3f7c2a)) !important;*/
         border-right: none !important;
         bottom: 0;
@@ -865,20 +865,20 @@
     .btn-success {
         --vz-btn-color: #fff;
 
-        --vz-btn-bg: #1596cd;
-        --vz-btn-border-color: #1596cd;
+        --vz-btn-bg: ##0b2d5c !important;
+        --vz-btn-border-color: ##0b2d5c !important;
 
         --vz-btn-hover-color: #fff;
-        --vz-btn-hover-bg: #e17616;
-        --vz-btn-hover-border-color: #e17616;
+        /*--vz-btn-hover-bg: #e17616;*/
+        /*--vz-btn-hover-border-color: #e17616;*/
         --vz-btn-focus-shadow-rgb: 126, 189, 136;
-        --vz-btn-active-color: #fff;
-        --vz-btn-active-bg: #528e5c;
-        --vz-btn-active-border-color: #4d8556;
+        /*--vz-btn-active-color: #fff;*/
+        /*--vz-btn-active-bg: #528e5c;*/
+        --vz-btn-active-border-color: ##0b2d5c;
         --vz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
         --vz-btn-disabled-color: #fff;
-        --vz-btn-disabled-bg: #67b173;
-        --vz-btn-disabled-border-color: #67b173;
+        --vz-btn-disabled-bg: ##0b2d5c;
+        --vz-btn-disabled-border-color: ##0b2d5c;
     }
 
 
@@ -890,11 +890,11 @@
          --vz-btn-border-color: #1596cd;
             /*background: -webkit-gradient(linear, left top, right top, from(#3f7c2a), to(#3f7c2a)) !important;*/
         --vz-btn-hover-color: #fff;
-        --vz-btn-hover-bg: #e17616;
-        --vz-btn-hover-border-color: #e17616;
+        /*--vz-btn-hover-bg: #e17616;*/
+        /*--vz-btn-hover-border-color: #e17616;*/
         --vz-btn-focus-shadow-rgb: 90, 140, 231;
-        --vz-btn-active-color: #fff;
-        --vz-btn-active-bg: #3f7c2a;
+        /*--vz-btn-active-color: #fff;*/
+        /*--vz-btn-active-bg: #3f7c2a;*/
         --vz-btn-active-border-color: #3f7c2a;
         --vz-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
         --vz-btn-disabled-color: #fff;
@@ -12301,7 +12301,6 @@
     .fc-toolbar-chunk .btn-group .btn.active,
     .fc-toolbar-chunk .btn-group .btn:hover {
         color: #fff;
-        background-color: #5b71b9
     }
 
     .fc-toolbar-chunk .fc-today-button {

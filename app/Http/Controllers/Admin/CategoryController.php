@@ -54,27 +54,27 @@ class CategoryController extends Controller
              * Upload image to:
              * public/categories
              */
-           if ($request->hasFile('image')) {
+            if ($request->hasFile('image')) {
 
-            $image = $request->file('image');
+                $image = $request->file('image');
 
-            $imageName = time() . '_' . uniqid() . '.' .
-                $image->getClientOriginalExtension();
+                $imageName = time() . '_' . uniqid() . '.' .
+                    $image->getClientOriginalExtension();
 
-            // Don't use public_path()
-            $destinationPath = FolderPath('categories');
+                // Don't use public_path()
+                $destinationPath = FolderPath('categories');
 
-            // Create folder if it doesn't exist
-            if (!is_dir($destinationPath)) {
-                mkdir($destinationPath, 0755, true);
+                // Create folder if it doesn't exist
+                if (!is_dir($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                // Move image
+                $image->move($destinationPath, $imageName);
+
+                // Save only filename in DB
+                $category->image = $imageName;
             }
-
-            // Move image
-            $image->move($destinationPath, $imageName);
-
-            // Save only filename in DB
-            $category->image = $imageName;
-        }
 
             $category->save();
 
@@ -111,60 +111,63 @@ class CategoryController extends Controller
         try {
 
             $category = Category::where('id', $id)->firstOrFail();
-
             $category->name = $request->name;
+            $category->meta_title = $request->meta_tittle;
+            $category->meta_description = $request->meta_description;
+            $category->head = $request->head;
+            $category->body = $request->body;
 
             // Slug automatically regenerated from name
             $category->slugname = Str::slug($request->name);
 
             $category->sort_desicription = $request->sort_desicription;
 
-             if ($request->hasFile('image')) {
+            if ($request->hasFile('image')) {
 
-            /*
+                /*
             |--------------------------------------------------------------------------
             | Root Folder Path
             |--------------------------------------------------------------------------
             */
-            $destinationPath = FolderPath('categories');
+                $destinationPath = FolderPath('categories');
 
-            /*
+                /*
             |--------------------------------------------------------------------------
             | Remove Old Image
             |--------------------------------------------------------------------------
             */
-            if (!empty($category->image)) {
+                if (!empty($category->image)) {
 
-                $oldImagePath = $destinationPath . '/' . $category->image;
+                    $oldImagePath = $destinationPath . '/' . $category->image;
 
-                if (file_exists($oldImagePath)) {
-                    unlink($oldImagePath);
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
                 }
-            }
 
-            /*
+                /*
             |--------------------------------------------------------------------------
             | Create Folder If Not Exists
             |--------------------------------------------------------------------------
             */
-            if (!is_dir($destinationPath)) {
-                mkdir($destinationPath, 0755, true);
-            }
+                if (!is_dir($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
 
-            /*
+                /*
             |--------------------------------------------------------------------------
             | Upload New Image
             |--------------------------------------------------------------------------
             */
-            $image = $request->file('image');
+                $image = $request->file('image');
 
-            $imageName = time() . '_' . uniqid() . '.' .
-                $image->getClientOriginalExtension();
+                $imageName = time() . '_' . uniqid() . '.' .
+                    $image->getClientOriginalExtension();
 
-            $image->move($destinationPath, $imageName);
+                $image->move($destinationPath, $imageName);
 
-            $category->image = $imageName;
-        }
+                $category->image = $imageName;
+            }
 
             $category->save();
 
@@ -180,64 +183,17 @@ class CategoryController extends Controller
         }
     }
 
-   public function destroy($id)
-   {
-    try {
+    public function destroy($id)
+    {
+        try {
 
-        $category = Category::where('id', $id)->firstOrFail();
+            $category = Category::where('id', $id)->firstOrFail();
 
-        /*
+            /*
         |--------------------------------------------------------------------------
         | Remove Category Image
         |--------------------------------------------------------------------------
         */
-        if (!empty($category->image)) {
-
-            $imagePath = FolderPath('categories') . '/' . $category->image;
-
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
-            }
-        }
-
-        // Hard delete
-        $category->delete();
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Category deleted successfully.',
-        ]);
-
-    } catch (\Exception $e) {
-
-        return response()->json([
-            'status' => false,
-            'message' => 'Unable to delete category.',
-        ], 500);
-    }
-}
-
-    /**
-     * Hard delete multiple categories.
-     */
-  public function bulkDelete(Request $request)
-  {
-    $request->validate([
-        'ids' => 'required|array',
-        'ids.*' => 'required|integer',
-    ]);
-
-    try {
-
-        $categories = Category::whereIn('id', $request->ids)->get();
-
-        foreach ($categories as $category) {
-
-            /*
-            |--------------------------------------------------------------------------
-            | Remove Category Image
-            |--------------------------------------------------------------------------
-            */
             if (!empty($category->image)) {
 
                 $imagePath = FolderPath('categories') . '/' . $category->image;
@@ -249,19 +205,64 @@ class CategoryController extends Controller
 
             // Hard delete
             $category->delete();
-        }
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Selected categories deleted successfully.',
+            return response()->json([
+                'status' => true,
+                'message' => 'Category deleted successfully.',
+            ]);
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'status' => false,
+                'message' => 'Unable to delete category.',
+            ], 500);
+        }
+    }
+
+    /**
+     * Hard delete multiple categories.
+     */
+    public function bulkDelete(Request $request)
+    {
+        $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'required|integer',
         ]);
 
-    } catch (\Exception $e) {
+        try {
 
-        return response()->json([
-            'status' => false,
-            'message' => 'Unable to delete selected categories.',
-        ], 500);
+            $categories = Category::whereIn('id', $request->ids)->get();
+
+            foreach ($categories as $category) {
+
+                /*
+            |--------------------------------------------------------------------------
+            | Remove Category Image
+            |--------------------------------------------------------------------------
+            */
+                if (!empty($category->image)) {
+
+                    $imagePath = FolderPath('categories') . '/' . $category->image;
+
+                    if (file_exists($imagePath)) {
+                        unlink($imagePath);
+                    }
+                }
+
+                // Hard delete
+                $category->delete();
+            }
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Selected categories deleted successfully.',
+            ]);
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'status' => false,
+                'message' => 'Unable to delete selected categories.',
+            ], 500);
+        }
     }
-}
 }

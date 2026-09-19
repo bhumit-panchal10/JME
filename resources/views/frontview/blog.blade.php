@@ -1,5 +1,23 @@
 @extends('layouts.front')
-@section('title', 'Blog')
+@section('title', config('app.name') . '' . ($meta->metaTitle ?? ''))
+@section('opTag')
+    {{-- Meta tags --}}
+    <meta name="description" content="{{ $meta->metaDescription ?? '' }}">
+    <meta name="keywords" content="{{ $meta->metaKeyword ?? '' }}">
+    <meta name="title" content="{{ $meta->metaTitle ?? '' }}">
+@endsection
+
+@section('head')
+    {!! $meta->head ?? '' !!}
+@endsection
+
+@section('body')
+    @if (!empty($meta->body))
+        <script type="text/javascript">
+            {!! $meta->body !!}
+        </script>
+    @endif
+@endsection
 @section('content')
     <style>
         .jme-blog-pagination-wrap {
@@ -84,8 +102,8 @@
     </style>
 
     <!-- =========================================
-                                     JME ABOUT BREADCRUMB / INNER HERO
-                                ========================================= -->
+                                             JME ABOUT BREADCRUMB / INNER HERO
+                                        ========================================= -->
     <section class="jme-inner-hero">
 
         <!-- Dark overlay -->
@@ -95,8 +113,8 @@
             <div class="jme-inner-content">
 
                 <!-- =========================
-                                                 WHITE CONTENT CARD
-                                            ========================== -->
+                                                         WHITE CONTENT CARD
+                                                    ========================== -->
                 <div class="jme-inner-card">
 
                     <div class="jme-card-tag">
@@ -166,8 +184,8 @@
 
 
         <!-- =========================
-                                         BOTTOM NAVY STRIP
-                                    ========================== -->
+                                                 BOTTOM NAVY STRIP
+                                            ========================== -->
         <div class="jme-bottom-strip">
 
             <span class="bottom-green-shape"></span>
@@ -187,16 +205,16 @@
 
 
     <!-- =====================================================
-                                     JME LATEST INSIGHTS
-                                ====================================================== -->
+                                             JME LATEST INSIGHTS
+                                        ====================================================== -->
 
     <section class="jme-latest-insights" id="latestInsights">
 
         <div class="jme-container">
 
             <!-- =============================================
-                                             SECTION HEADER
-                                        ============================================== -->
+                                                     SECTION HEADER
+                                                ============================================== -->
             <div class="jme-latest-head">
 
                 <div>
@@ -246,8 +264,8 @@
 
 
             <!-- =============================================
-                                             BLOG GRID
-                                        ============================================== -->
+                                                     BLOG GRID
+                                                ============================================== -->
 
             <div class="jme-blog-grid">
 
@@ -312,7 +330,7 @@
 
                             <div class="jme-insight-bottom">
 
-                             
+
 
                                 <a href="{{ url('blog-detail/' . $blog->slugname) }}" class="jme-insight-link">
 

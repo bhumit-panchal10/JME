@@ -1,64 +1,69 @@
-<style>
-    /* =========================================================
-   INLINE VIDEO
-========================================================= */
-
-.jme-service-video-card {
-    position: relative;
-}
-
-
-.jme-service-video-preview {
-    position: relative;
-
-    width: 100%;
-
-    aspect-ratio: 16 / 9;
-
-    overflow: hidden;
-
-    background: #000;
-}
-
-
-.jme-service-video-preview > img {
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    object-fit: cover;
-}
-
-
-/* actual playing iframe */
-
-.jme-service-inline-video {
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    border: 0;
-
-    background: #000;
-}
-
-
-/* playing state */
-
-.jme-service-video-card.is-playing
-.jme-service-video-preview {
-    background: #000;
-}
-</style>
 @extends('layouts.front')
-@section('title', 'Service Detail')
+@section('title', config('app.name') . '' . ($meta->meta_tittle ?? ''))
+@section('opTag')
+    {{-- Meta tags --}}
+    <meta name="description" content="{{ $meta->meta_description ?? '' }}">
+    <meta name="keywords" content="{{ $meta->metaKeyword ?? '' }}">
+    <meta name="title" content="{{ $meta->meta_tittle ?? '' }}">
+@endsection
+
+@section('head')
+    {!! $meta->head ?? '' !!}
+@endsection
+
+@section('body')
+    @if (!empty($meta->body))
+        <script type="text/javascript">
+            {!! $meta->body !!}
+        </script>
+    @endif
+@endsection
 @section('content')
+    <style>
+        .jme-service-video-card {
+            position: relative;
+        }
+
+        .jme-service-video-preview {
+            position: relative;
+
+            width: 100%;
+
+            aspect-ratio: 16 / 9;
+
+            overflow: hidden;
+
+            background: #000;
+        }
+
+        .jme-service-video-preview>img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+        }
+
+        .jme-service-inline-video {
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            border: 0;
+
+            background: #000;
+        }
+
+        .jme-service-video-card.is-playing .jme-service-video-preview {
+            background: #000;
+        }
+    </style>
     <section class="jme-inner-hero">
 
         <!-- Dark overlay -->
@@ -67,8 +72,8 @@
             <div class="jme-inner-content">
 
                 <!-- =========================
-                                                                                                                                                                                                     WHITE CONTENT CARD
-                                                                                                                                                                                                ========================== -->
+                                                                                                                                                                                                                                     WHITE CONTENT CARD
+                                                                                                                                                                                                                                ========================== -->
                 <div class="jme-inner-card">
 
                     <div class="jme-card-tag">
@@ -156,117 +161,94 @@
                 <div class="jme-sd-top-grid">
 
                     @php
-                    $mainImage = $service->image
-                        ? asset('services/' . $service->image)
-                        : asset('assets/images/no-image.jpg');
-                @endphp
+                        $mainImage = $service->image
+                            ? asset('services/' . $service->image)
+                            : asset('assets/images/no-image.jpg');
+                    @endphp
 
 
-         <div class="jme-sd-slider" id="jmeServiceSlider">
+                    <div class="jme-sd-slider" id="jmeServiceSlider">
 
-    {{-- LEFT THUMBNAILS --}}
-    <div class="jme-sd-thumbs" id="jmeSdThumbRow">
+                        {{-- LEFT THUMBNAILS --}}
+                        <div class="jme-sd-thumbs" id="jmeSdThumbRow">
 
-        {{-- MAIN SERVICE IMAGE --}}
-        <button
-            type="button"
-            class="jme-sd-thumb active"
-            data-image="{{ $mainImage }}"
-            data-alt="{{ $service->name }}">
+                            {{-- MAIN SERVICE IMAGE --}}
+                            <button type="button" class="jme-sd-thumb active" data-image="{{ $mainImage }}"
+                                data-alt="{{ $service->name }}">
 
-            <img
-                src="{{ $mainImage }}"
-                alt="{{ $service->name }}">
+                                <img src="{{ $mainImage }}" alt="{{ $service->name }}">
 
-        </button>
+                            </button>
 
 
-        {{-- PHOTO GALLERY IMAGES --}}
-        @foreach ($service->photoGalleries as $gallery)
+                            {{-- PHOTO GALLERY IMAGES --}}
+                            @foreach ($service->photoGalleries as $gallery)
+                                @php
+                                    $galleryImage = asset('photo-gallery/' . $gallery->image);
+                                @endphp
 
-            @php
-                $galleryImage = asset('photo-gallery/' . $gallery->image);
-            @endphp
+                                <button type="button" class="jme-sd-thumb" data-image="{{ $galleryImage }}"
+                                    data-alt="{{ $service->name }}">
 
-            <button
-                type="button"
-                class="jme-sd-thumb"
-                data-image="{{ $galleryImage }}"
-                data-alt="{{ $service->name }}">
+                                    <img src="{{ $galleryImage }}" alt="{{ $service->name }}">
 
-                <img
-                    src="{{ $galleryImage }}"
-                    alt="{{ $service->name }}">
+                                </button>
+                            @endforeach
 
-            </button>
-
-        @endforeach
-
-    </div>
+                        </div>
 
 
-    {{-- MAIN IMAGE --}}
-    <div class="jme-sd-slider-stage" id="jmeSliderStage">
+                        {{-- MAIN IMAGE --}}
+                        <div class="jme-sd-slider-stage" id="jmeSliderStage">
 
-        <img
-            id="jmeSdMainImage"
-            class="jme-sd-slider-image"
-            src="{{ $mainImage }}"
-            alt="{{ $service->name }}">
+                            <img id="jmeSdMainImage" class="jme-sd-slider-image" src="{{ $mainImage }}"
+                                alt="{{ $service->name }}">
 
 
-        <div class="jme-sd-image-tag">
+                            <div class="jme-sd-image-tag">
 
-            <span></span>
+                                <span></span>
 
-            PROJECT VIEW
+                                PROJECT VIEW
 
-        </div>
-
-
-        {{-- Show arrows when there is at least one gallery image --}}
-        @if ($service->photoGalleries->count() > 0)
-
-            {{-- PREVIOUS --}}
-            <button
-                type="button"
-                class="jme-sd-slider-arrow jme-sd-slider-prev"
-                id="jmeSdPrevBtn"
-                aria-label="Previous Image">
-
-                <svg viewBox="0 0 24 24">
-                    <path d="M19 12H5"></path>
-                    <path d="M11 18l-6-6 6-6"></path>
-                </svg>
-
-            </button>
+                            </div>
 
 
-            {{-- NEXT --}}
-            <button
-                type="button"
-                class="jme-sd-slider-arrow jme-sd-slider-next"
-                id="jmeSdNextBtn"
-                aria-label="Next Image">
+                            {{-- Show arrows when there is at least one gallery image --}}
+                            @if ($service->photoGalleries->count() > 0)
+                                {{-- PREVIOUS --}}
+                                <button type="button" class="jme-sd-slider-arrow jme-sd-slider-prev" id="jmeSdPrevBtn"
+                                    aria-label="Previous Image">
 
-                <svg viewBox="0 0 24 24">
-                    <path d="M5 12h14"></path>
-                    <path d="M13 6l6 6-6 6"></path>
-                </svg>
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M19 12H5"></path>
+                                        <path d="M11 18l-6-6 6-6"></path>
+                                    </svg>
 
-            </button>
+                                </button>
 
-        @endif
 
-    </div>
+                                {{-- NEXT --}}
+                                <button type="button" class="jme-sd-slider-arrow jme-sd-slider-next" id="jmeSdNextBtn"
+                                    aria-label="Next Image">
 
-</div>
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M13 6l6 6-6 6"></path>
+                                    </svg>
+
+                                </button>
+                            @endif
+
+                        </div>
+
+                    </div>
 
 
 
                     <!-- =================================================
-                                                                                                                                                                                                         RIGHT : SERVICE DETAILS
-                                                                                                                                                                                                    ================================================== -->
+                                                                                                                                                                                                                                         RIGHT : SERVICE DETAILS
+                                                                                                                                                                                                                                    ================================================== -->
 
                     <div class="jme-sd-summary">
 
@@ -309,8 +291,8 @@
 
 
                         <!-- =========================================
-                                                                                                                                                                                                             SERVICE META
-                                                                                                                                                                                                        ========================================== -->
+                                                                                                                                                                                                                                             SERVICE META
+                                                                                                                                                                                                                                        ========================================== -->
 
                         <div class="jme-sd-meta">
 
@@ -381,8 +363,8 @@
         </section>
 
         <!-- =========================================================
-                                                                                                                                                                                         SERVICE DETAIL CONTENT
-                                                                                                                                                                                    ========================================================= -->
+                                                                                                                                                                                                                         SERVICE DETAIL CONTENT
+                                                                                                                                                                                                                    ========================================================= -->
 
         <section class="jme-service-detail-content">
 
@@ -799,34 +781,26 @@
                             @endphp
 
 
-                         <div class="jme-service-video-card"
-    data-video-url="{{ $url }}"
-    data-video-id="{{ $videoId ?? '' }}">
+                            <div class="jme-service-video-card" data-video-url="{{ $url }}"
+                                data-video-id="{{ $videoId ?? '' }}">
 
-    <div class="jme-service-video-preview">
+                                <div class="jme-service-video-preview">
 
-        <img
-            src="{{ $thumbnail }}"
-            alt="{{ $service->name }}"
-        >
+                                    <img src="{{ $thumbnail }}" alt="{{ $service->name }}">
 
-        <div class="jme-service-video-overlay"></div>
+                                    <div class="jme-service-video-overlay"></div>
 
-        <button
-            type="button"
-            class="jme-service-video-play"
-            aria-label="Play Video"
-        >
+                                    <button type="button" class="jme-service-video-play" aria-label="Play Video">
 
-            <svg viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"></path>
-            </svg>
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M8 5v14l11-7z"></path>
+                                        </svg>
 
-        </button>
+                                    </button>
 
-    </div>
+                                </div>
 
-</div>
+                            </div>
 
                         @empty
 
@@ -863,291 +837,289 @@
     </main>
 @endsection
 @section('scripts')
-<script>
-    /* =========================================================
-   SERVICE VIDEO - PLAY INSIDE CARD
-========================================================= */
+    <script>
+        /* =========================================================
+                                   SERVICE VIDEO - PLAY INSIDE CARD
+                                ========================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
 
-    const cards =
-        document.querySelectorAll(".jme-service-video-card");
+            const cards =
+                document.querySelectorAll(".jme-service-video-card");
 
-    if (!cards.length) {
-        return;
-    }
-
-
-    /* =====================================================
-       GET YOUTUBE ID
-    ====================================================== */
-
-    function getYoutubeId(url) {
-
-        if (!url) {
-            return "";
-        }
-
-        try {
-
-            /* youtube.com/watch?v= */
-
-            if (url.includes("youtube.com/watch")) {
-
-                const parsedUrl = new URL(url);
-
-                return parsedUrl.searchParams.get("v") || "";
-
-            }
-
-
-            /* youtu.be */
-
-            if (url.includes("youtu.be/")) {
-
-                return url
-                    .split("youtu.be/")[1]
-                    .split("?")[0]
-                    .split("&")[0];
-
-            }
-
-
-            /* youtube shorts */
-
-            if (url.includes("youtube.com/shorts/")) {
-
-                return url
-                    .split("youtube.com/shorts/")[1]
-                    .split("?")[0]
-                    .split("/")[0];
-
-            }
-
-
-            /* youtube embed */
-
-            if (url.includes("youtube.com/embed/")) {
-
-                return url
-                    .split("youtube.com/embed/")[1]
-                    .split("?")[0]
-                    .split("/")[0];
-
-            }
-
-        } catch (error) {
-
-            console.log("Video URL Error:", error);
-
-        }
-
-        return "";
-    }
-
-
-
-    /* =====================================================
-       GOOGLE DRIVE EMBED
-    ====================================================== */
-
-    function getGoogleDriveEmbed(url) {
-
-        if (!url || !url.includes("drive.google.com")) {
-            return "";
-        }
-
-
-        let fileId = "";
-
-
-        /* /file/d/FILE_ID/view */
-
-        if (url.includes("/file/d/")) {
-
-            fileId =
-                url
-                    .split("/file/d/")[1]
-                    .split("/")[0];
-
-        }
-
-
-        /* open?id=FILE_ID */
-
-        else {
-
-            try {
-
-                const parsedUrl =
-                    new URL(url);
-
-                fileId =
-                    parsedUrl.searchParams.get("id") || "";
-
-            } catch (error) {
-
-                fileId = "";
-
-            }
-
-        }
-
-
-        if (!fileId) {
-            return "";
-        }
-
-
-        return (
-            "https://drive.google.com/file/d/" +
-            fileId +
-            "/preview"
-        );
-
-    }
-
-
-
-    /* =====================================================
-       STOP OTHER VIDEOS
-    ====================================================== */
-
-    function stopOtherVideos(activeCard) {
-
-        cards.forEach(function (card) {
-
-            if (card === activeCard) {
+            if (!cards.length) {
                 return;
             }
 
 
-            const preview =
-                card.querySelector(
-                    ".jme-service-video-preview"
+            /* =====================================================
+               GET YOUTUBE ID
+            ====================================================== */
+
+            function getYoutubeId(url) {
+
+                if (!url) {
+                    return "";
+                }
+
+                try {
+
+                    /* youtube.com/watch?v= */
+
+                    if (url.includes("youtube.com/watch")) {
+
+                        const parsedUrl = new URL(url);
+
+                        return parsedUrl.searchParams.get("v") || "";
+
+                    }
+
+
+                    /* youtu.be */
+
+                    if (url.includes("youtu.be/")) {
+
+                        return url
+                            .split("youtu.be/")[1]
+                            .split("?")[0]
+                            .split("&")[0];
+
+                    }
+
+
+                    /* youtube shorts */
+
+                    if (url.includes("youtube.com/shorts/")) {
+
+                        return url
+                            .split("youtube.com/shorts/")[1]
+                            .split("?")[0]
+                            .split("/")[0];
+
+                    }
+
+
+                    /* youtube embed */
+
+                    if (url.includes("youtube.com/embed/")) {
+
+                        return url
+                            .split("youtube.com/embed/")[1]
+                            .split("?")[0]
+                            .split("/")[0];
+
+                    }
+
+                } catch (error) {
+
+                    console.log("Video URL Error:", error);
+
+                }
+
+                return "";
+            }
+
+
+
+            /* =====================================================
+               GOOGLE DRIVE EMBED
+            ====================================================== */
+
+            function getGoogleDriveEmbed(url) {
+
+                if (!url || !url.includes("drive.google.com")) {
+                    return "";
+                }
+
+
+                let fileId = "";
+
+
+                /* /file/d/FILE_ID/view */
+
+                if (url.includes("/file/d/")) {
+
+                    fileId =
+                        url
+                        .split("/file/d/")[1]
+                        .split("/")[0];
+
+                }
+
+
+                /* open?id=FILE_ID */
+                else {
+
+                    try {
+
+                        const parsedUrl =
+                            new URL(url);
+
+                        fileId =
+                            parsedUrl.searchParams.get("id") || "";
+
+                    } catch (error) {
+
+                        fileId = "";
+
+                    }
+
+                }
+
+
+                if (!fileId) {
+                    return "";
+                }
+
+
+                return (
+                    "https://drive.google.com/file/d/" +
+                    fileId +
+                    "/preview"
                 );
 
-
-            if (!preview) {
-                return;
             }
 
 
-            const originalHtml =
-                preview.dataset.originalHtml;
+
+            /* =====================================================
+               STOP OTHER VIDEOS
+            ====================================================== */
+
+            function stopOtherVideos(activeCard) {
+
+                cards.forEach(function(card) {
+
+                    if (card === activeCard) {
+                        return;
+                    }
 
 
-            if (originalHtml) {
+                    const preview =
+                        card.querySelector(
+                            ".jme-service-video-preview"
+                        );
 
-                preview.innerHTML =
-                    originalHtml;
+
+                    if (!preview) {
+                        return;
+                    }
+
+
+                    const originalHtml =
+                        preview.dataset.originalHtml;
+
+
+                    if (originalHtml) {
+
+                        preview.innerHTML =
+                            originalHtml;
+
+                    }
+
+
+                    card.classList.remove(
+                        "is-playing"
+                    );
+
+                });
+
+
+                bindPlayButtons();
 
             }
 
 
-            card.classList.remove(
-                "is-playing"
-            );
 
-        });
+            /* =====================================================
+               PLAY VIDEO
+            ====================================================== */
 
+            function playVideo(card) {
 
-        bindPlayButtons();
-
-    }
-
-
-
-    /* =====================================================
-       PLAY VIDEO
-    ====================================================== */
-
-    function playVideo(card) {
-
-        const preview =
-            card.querySelector(
-                ".jme-service-video-preview"
-            );
+                const preview =
+                    card.querySelector(
+                        ".jme-service-video-preview"
+                    );
 
 
-        if (!preview) {
-            return;
-        }
+                if (!preview) {
+                    return;
+                }
 
 
-        /* store original thumbnail html */
+                /* store original thumbnail html */
 
-        if (!preview.dataset.originalHtml) {
+                if (!preview.dataset.originalHtml) {
 
-            preview.dataset.originalHtml =
-                preview.innerHTML;
+                    preview.dataset.originalHtml =
+                        preview.innerHTML;
 
-        }
-
-
-        const url =
-            card.dataset.videoUrl || "";
+                }
 
 
-        const directVideoId =
-            card.dataset.videoId || "";
+                const url =
+                    card.dataset.videoUrl || "";
 
 
-        let embedUrl = "";
+                const directVideoId =
+                    card.dataset.videoId || "";
 
 
-        /* =============================================
-           YOUTUBE
-        ============================================== */
-
-        const youtubeId =
-            directVideoId ||
-            getYoutubeId(url);
+                let embedUrl = "";
 
 
-        if (youtubeId) {
+                /* =============================================
+                   YOUTUBE
+                ============================================== */
 
-            embedUrl =
-                "https://www.youtube.com/embed/" +
-                youtubeId +
-                "?autoplay=1&rel=0&playsinline=1";
-
-        }
-
-
-        /* =============================================
-           GOOGLE DRIVE
-        ============================================== */
-
-        else if (
-            url.includes("drive.google.com")
-        ) {
-
-            embedUrl =
-                getGoogleDriveEmbed(url);
-
-        }
+                const youtubeId =
+                    directVideoId ||
+                    getYoutubeId(url);
 
 
-        /* =============================================
-           INVALID
-        ============================================== */
+                if (youtubeId) {
 
-        if (!embedUrl) {
+                    embedUrl =
+                        "https://www.youtube.com/embed/" +
+                        youtubeId +
+                        "?autoplay=1&rel=0&playsinline=1";
 
-            console.log(
-                "Unable to play video:",
-                url
-            );
-
-            return;
-        }
+                }
 
 
-        stopOtherVideos(card);
+                /* =============================================
+                   GOOGLE DRIVE
+                ============================================== */
+                else if (
+                    url.includes("drive.google.com")
+                ) {
+
+                    embedUrl =
+                        getGoogleDriveEmbed(url);
+
+                }
 
 
-        preview.innerHTML = `
+                /* =============================================
+                   INVALID
+                ============================================== */
+
+                if (!embedUrl) {
+
+                    console.log(
+                        "Unable to play video:",
+                        url
+                    );
+
+                    return;
+                }
+
+
+                stopOtherVideos(card);
+
+
+                preview.innerHTML = `
 
             <iframe
                 class="jme-service-inline-video"
@@ -1161,64 +1133,64 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
 
 
-        card.classList.add(
-            "is-playing"
-        );
-
-    }
-
-
-
-    /* =====================================================
-       BIND BUTTON
-    ====================================================== */
-
-    function bindPlayButtons() {
-
-        cards.forEach(function (card) {
-
-            const playButton =
-                card.querySelector(
-                    ".jme-service-video-play"
+                card.classList.add(
+                    "is-playing"
                 );
 
-
-            if (!playButton) {
-                return;
             }
 
 
-            if (
-                playButton.dataset.bound === "1"
-            ) {
-                return;
+
+            /* =====================================================
+               BIND BUTTON
+            ====================================================== */
+
+            function bindPlayButtons() {
+
+                cards.forEach(function(card) {
+
+                    const playButton =
+                        card.querySelector(
+                            ".jme-service-video-play"
+                        );
+
+
+                    if (!playButton) {
+                        return;
+                    }
+
+
+                    if (
+                        playButton.dataset.bound === "1"
+                    ) {
+                        return;
+                    }
+
+
+                    playButton.dataset.bound =
+                        "1";
+
+
+                    playButton.addEventListener(
+                        "click",
+                        function(event) {
+
+                            event.preventDefault();
+
+                            event.stopPropagation();
+
+                            playVideo(card);
+
+                        }
+                    );
+
+                });
+
             }
 
 
-            playButton.dataset.bound =
-                "1";
-
-
-            playButton.addEventListener(
-                "click",
-                function (event) {
-
-                    event.preventDefault();
-
-                    event.stopPropagation();
-
-                    playVideo(card);
-
-                }
-            );
+            bindPlayButtons();
 
         });
-
-    }
-
-
-    bindPlayButtons();
-
-});
-</script>
+    </script>
 @endsection

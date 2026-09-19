@@ -1,249 +1,256 @@
 <style>
-.jme-contact-v2-info-text small {
-    font-size: 11px !important;
-}
-.jme-contact-v2-info-text p {
-            font-size: 11px !important;
-}
+    .jme-contact-v2-info-text small {
+        font-size: 11px !important;
+    }
+
+    .jme-contact-v2-info-text p {
+        font-size: 11px !important;
+    }
+
     /* =========================================================
    CONTACT SOCIAL MEDIA
 ========================================================= */
 
-.jme-contact-v2-info-text .jme-contact-v2-socials {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
+    .jme-contact-v2-info-text .jme-contact-v2-socials {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
 
-    gap: 8px;
+        gap: 8px;
 
-    margin-top: 7px;
-}
+        margin-top: 7px;
+    }
 
 
-/* IMPORTANT:
+    /* IMPORTANT:
    Override normal contact link CSS
 ========================================================= */
 
-.jme-contact-v2-info-text
-.jme-contact-v2-socials
-.jme-contact-v2-social {
+    .jme-contact-v2-info-text .jme-contact-v2-socials .jme-contact-v2-social {
 
-    position: relative;
+        position: relative;
 
-    width: 34px;
-    height: 34px;
+        width: 34px;
+        height: 34px;
 
-    min-width: 34px;
-    max-width: 34px;
+        min-width: 34px;
+        max-width: 34px;
 
-    min-height: 34px;
-    max-height: 34px;
+        min-height: 34px;
+        max-height: 34px;
 
-    flex:
-        0
-        0
-        34px;
+        flex:
+            0 0 34px;
 
-    display: inline-flex !important;
+        display: inline-flex !important;
 
-    align-items: center;
-    justify-content: center;
+        align-items: center;
+        justify-content: center;
 
-    padding: 0 !important;
-    margin: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
 
-    color:
-        var(--color-blue);
+        color:
+            var(--color-blue);
 
-    background:
-        var(--color-blue-soft);
+        background:
+            var(--color-blue-soft);
 
-    border:
-        1px solid
-        var(--color-border);
+        border:
+            1px solid var(--color-border);
 
-    border-radius: 50%;
+        border-radius: 50%;
 
-    text-decoration: none;
+        text-decoration: none;
 
-    overflow: hidden;
+        overflow: hidden;
 
-    line-height: 1;
+        line-height: 1;
 
-    transition:
-        color .3s ease,
-        background .3s ease,
-        border-color .3s ease,
-        transform .3s ease,
-        box-shadow .3s ease;
-}
+        transition:
+            color .3s ease,
+            background .3s ease,
+            border-color .3s ease,
+            transform .3s ease,
+            box-shadow .3s ease;
+    }
 
 
-/* =========================================================
+    /* =========================================================
    SOCIAL SVG
 ========================================================= */
 
-.jme-contact-v2-info-text
-.jme-contact-v2-socials
-.jme-contact-v2-social svg {
+    .jme-contact-v2-info-text .jme-contact-v2-socials .jme-contact-v2-social svg {
 
-    width: 16px !important;
-    height: 16px !important;
+        width: 16px !important;
+        height: 16px !important;
 
-    min-width: 16px;
-    min-height: 16px;
+        min-width: 16px;
+        min-height: 16px;
 
-    display: block;
+        display: block;
 
-    margin: 0 !important;
-    padding: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
 
-    fill: none !important;
+        fill: none !important;
 
-    stroke:
-        currentColor !important;
+        stroke:
+            currentColor !important;
 
-    stroke-width: 1.7;
+        stroke-width: 1.7;
 
-    stroke-linecap: round;
-    stroke-linejoin: round;
+        stroke-linecap: round;
+        stroke-linejoin: round;
 
-    transition:
-        transform .3s ease;
-}
+        transition:
+            transform .3s ease;
+    }
 
 
-/* =========================================================
+    /* =========================================================
    HOVER
 ========================================================= */
 
-.jme-contact-v2-info-text
-.jme-contact-v2-socials
-.jme-contact-v2-social:hover {
+    .jme-contact-v2-info-text .jme-contact-v2-socials .jme-contact-v2-social:hover {
 
-    color: #ffffff !important;
+        color: #ffffff !important;
 
-    background:
-        var(--color-green);
+        background:
+            var(--color-green);
 
-    border-color:
-        var(--color-green);
+        border-color:
+            var(--color-green);
 
-    transform:
-        translateY(-3px);
+        transform:
+            translateY(-3px);
 
-    box-shadow:
-        0 7px 16px
-        rgba(73,169,66,.20);
-}
+        box-shadow:
+            0 7px 16px rgba(73, 169, 66, .20);
+    }
 
 
-.jme-contact-v2-info-text
-.jme-contact-v2-socials
-.jme-contact-v2-social:hover svg {
+    .jme-contact-v2-info-text .jme-contact-v2-socials .jme-contact-v2-social:hover svg {
 
-    transform:
-        scale(1.08);
-}
+        transform:
+            scale(1.08);
+    }
 
-   .jme-captcha-wrap {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 4px 0 12px;
-        }
+    .jme-captcha-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 4px 0 12px;
+    }
 
 
-        /* Captcha Image */
-        .jme-captcha-image {
-            height: 46px;
-            display: flex;
-            align-items: center;
-            border: 1px solid #e1e6ef;
-            border-radius: 6px;
-            background: #fff;
-            overflow: hidden;
-        }
+    /* Captcha Image */
+    .jme-captcha-image {
+        height: 46px;
+        display: flex;
+        align-items: center;
+        border: 1px solid #e1e6ef;
+        border-radius: 6px;
+        background: #fff;
+        overflow: hidden;
+    }
 
-        .jme-captcha-image span {
-            display: flex;
-            align-items: center;
-        }
+    .jme-captcha-image span {
+        display: flex;
+        align-items: center;
+    }
 
-        .jme-captcha-image img {
-            height: 46px;
-            width: auto;
-            display: block;
-        }
-
-
-        /* Red Refresh Button */
-        .jme-captcha-reload {
-            width: 46px;
-            height: 46px;
-            min-width: 46px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border: 0;
-            outline: 0;
-            border-radius: 6px;
-
-            background: #df293d;
-            color: #ffffff;
-
-            cursor: pointer;
-
-            transition:
-                background 0.25s ease,
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
-        }
-
-        .jme-captcha-reload svg {
-            display: block;
-            width: 20px;
-            height: 20px;
-            stroke: #ffffff;
-        }
+    .jme-captcha-image img {
+        height: 46px;
+        width: auto;
+        display: block;
+    }
 
 
-        /* Hover */
-        .jme-captcha-reload:hover {
-            background: #c91f32;
-            color: #ffffff;
-            transform: translateY(-1px);
-            box-shadow: 0 5px 12px rgba(223, 41, 61, 0.25);
-        }
+    /* Red Refresh Button */
+    .jme-captcha-reload {
+        width: 46px;
+        height: 46px;
+        min-width: 46px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: 0;
+        outline: 0;
+        border-radius: 6px;
+
+        background: #df293d;
+        color: #ffffff;
+
+        cursor: pointer;
+
+        transition:
+            background 0.25s ease,
+            transform 0.25s ease,
+            box-shadow 0.25s ease;
+    }
+
+    .jme-captcha-reload svg {
+        display: block;
+        width: 20px;
+        height: 20px;
+        stroke: #ffffff;
+    }
 
 
-        /* Click */
-        .jme-captcha-reload:active {
-            transform: scale(0.95);
-        }
+    /* Hover */
+    .jme-captcha-reload:hover {
+        background: #c91f32;
+        color: #ffffff;
+        transform: translateY(-1px);
+        box-shadow: 0 5px 12px rgba(223, 41, 61, 0.25);
+    }
 
 
-        /* Error */
-        .captcha-error {
-            display: block;
-            margin-top: 6px;
-            color: #df293d;
-            font-size: 12px;
-        }
+    /* Click */
+    .jme-captcha-reload:active {
+        transform: scale(0.95);
+    }
+
+
+    /* Error */
+    .captcha-error {
+        display: block;
+        margin-top: 6px;
+        color: #df293d;
+        font-size: 12px;
+    }
 </style>
 @extends('layouts.front')
-@section('title', 'Contact Us')
-@section('content')
+@section('title', config('app.name') . '' . ($meta->metaTitle ?? ''))
+@section('opTag')
+    {{-- Meta tags --}}
+    <meta name="description" content="{{ $meta->metaDescription ?? '' }}">
+    <meta name="keywords" content="{{ $meta->metaKeyword ?? '' }}">
+    <meta name="title" content="{{ $meta->metaTitle ?? '' }}">
+@endsection
 
+@section('head')
+    {!! $meta->head ?? '' !!}
+@endsection
+
+@section('body')
+    @if (!empty($meta->body))
+        <script type="text/javascript">
+            {!! $meta->body !!}
+        </script>
+    @endif
+@endsection
+@section('content')
     <main class="jme-contact-v2">
 
 
         <!-- =====================================================
-                                                                                                         HERO
-                                                                                                    ====================================================== -->
+                                                                                                             HERO
+                                                                                                        ====================================================== -->
         <section class="jme-contact-v2-hero">
 
             <div class="jme-contact-v2-hero-left">
@@ -358,8 +365,8 @@
 
 
         <!-- =====================================================
-                                                                                                         FLOATING CONTACT BAR
-                                                                                                    ====================================================== -->
+                                                                                                             FLOATING CONTACT BAR
+                                                                                                        ====================================================== -->
         <section class="jme-contact-v2-info">
 
             <div class="jme-contact-v2-container">
@@ -367,117 +374,93 @@
                 <div class="jme-contact-v2-info-card">
 
 
-               <div class="jme-contact-v2-info-item">
+                    <div class="jme-contact-v2-info-item">
 
-    <div class="jme-contact-v2-info-icon">
+                        <div class="jme-contact-v2-info-icon">
 
-        <svg viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="9"></circle>
-            <path d="M8 12h8"></path>
-            <path d="M12 8v8"></path>
-        </svg>
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <path d="M8 12h8"></path>
+                                <path d="M12 8v8"></path>
+                            </svg>
 
-    </div>
-
-
-    <div class="jme-contact-v2-info-text">
-
-        <small>Follow Us</small>
-
-        <div class="jme-contact-v2-socials">
-
-            <!-- Facebook -->
-            <a href=""
-               target="_blank"
-               class="jme-contact-v2-social"
-               aria-label="Facebook">
-
-                <svg viewBox="0 0 24 24">
-                    <path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v5h4v-5h3l1-4h-4V9c0-.7.3-1 1-1z"></path>
-                </svg>
-
-            </a>
+                        </div>
 
 
-            <!-- Instagram -->
-            <a href=""
-               target="_blank"
-               class="jme-contact-v2-social"
-               aria-label="Instagram">
+                        <div class="jme-contact-v2-info-text">
 
-                <svg viewBox="0 0 24 24">
+                            <small>Follow Us</small>
 
-                    <rect
-                        x="4"
-                        y="4"
-                        width="16"
-                        height="16"
-                        rx="5"
-                    ></rect>
+                            <div class="jme-contact-v2-socials">
 
-                    <circle
-                        cx="12"
-                        cy="12"
-                        r="3.5"
-                    ></circle>
+                                <!-- Facebook -->
+                                <a href="" target="_blank" class="jme-contact-v2-social" aria-label="Facebook">
 
-                    <circle
-                        cx="17"
-                        cy="7"
-                        r=".8"
-                    ></circle>
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v5h4v-5h3l1-4h-4V9c0-.7.3-1 1-1z"></path>
+                                    </svg>
 
-                </svg>
-
-            </a>
+                                </a>
 
 
-            <!-- LinkedIn -->
-            <a href=""
-               target="_blank"
-               class="jme-contact-v2-social"
-               aria-label="LinkedIn">
+                                <!-- Instagram -->
+                                <a href="" target="_blank" class="jme-contact-v2-social" aria-label="Instagram">
 
-                <svg viewBox="0 0 24 24">
+                                    <svg viewBox="0 0 24 24">
 
-                    <path d="M6 9v9"></path>
+                                        <rect x="4" y="4" width="16" height="16" rx="5"></rect>
 
-                    <path d="M6 6.5v.01"></path>
+                                        <circle cx="12" cy="12" r="3.5"></circle>
 
-                    <path d="M10 18v-9"></path>
+                                        <circle cx="17" cy="7" r=".8"></circle>
 
-                    <path d="M10 13c0-2.2 1.4-4 3.8-4 2.2 0 4.2 1.5 4.2 4.5V18"></path>
+                                    </svg>
 
-                </svg>
-
-            </a>
+                                </a>
 
 
-            <!-- YouTube -->
-            <a href=""
-               target="_blank"
-               class="jme-contact-v2-social"
-               aria-label="YouTube">
+                                <!-- LinkedIn -->
+                                <a href="" target="_blank" class="jme-contact-v2-social" aria-label="LinkedIn">
 
-                <svg viewBox="0 0 24 24">
+                                    <svg viewBox="0 0 24 24">
 
-                    <path d="M20 8.5c-.2-1.2-.9-1.9-2.1-2.1C16 6.1 14 6 12 6s-4 .1-5.9.4C4.9 6.6 4.2 7.3 4 8.5c-.2 1.1-.3 2.3-.3 3.5s.1 2.4.3 3.5c.2 1.2.9 1.9 2.1 2.1C8 17.9 10 18 12 18s4-.1 5.9-.4c1.2-.2 1.9-.9 2.1-2.1.2-1.1.3-2.3.3-3.5s-.1-2.4-.3-3.5z"></path>
+                                        <path d="M6 9v9"></path>
 
-                    <path d="M10 9l5 3-5 3z"></path>
+                                        <path d="M6 6.5v.01"></path>
 
-                </svg>
+                                        <path d="M10 18v-9"></path>
 
-            </a>
+                                        <path d="M10 13c0-2.2 1.4-4 3.8-4 2.2 0 4.2 1.5 4.2 4.5V18"></path>
 
-        </div>
+                                    </svg>
 
-        <p>
-            Connect with us on social media.
-        </p>
+                                </a>
 
-    </div>
 
-</div>
+                                <!-- YouTube -->
+                                <a href="" target="_blank" class="jme-contact-v2-social" aria-label="YouTube">
+
+                                    <svg viewBox="0 0 24 24">
+
+                                        <path
+                                            d="M20 8.5c-.2-1.2-.9-1.9-2.1-2.1C16 6.1 14 6 12 6s-4 .1-5.9.4C4.9 6.6 4.2 7.3 4 8.5c-.2 1.1-.3 2.3-.3 3.5s.1 2.4.3 3.5c.2 1.2.9 1.9 2.1 2.1C8 17.9 10 18 12 18s4-.1 5.9-.4c1.2-.2 1.9-.9 2.1-2.1.2-1.1.3-2.3.3-3.5s-.1-2.4-.3-3.5z">
+                                        </path>
+
+                                        <path d="M10 9l5 3-5 3z"></path>
+
+                                    </svg>
+
+                                </a>
+
+                            </div>
+
+                            <p>
+                                Connect with us on social media.
+                            </p>
+
+                        </div>
+
+                    </div>
 
                     <!-- EMAIL -->
                     <div class="jme-contact-v2-info-item">
@@ -515,33 +498,31 @@
                     <!-- PHONE -->
                     <div class="jme-contact-v2-info-item">
 
-                      <div class="jme-contact-v2-info-icon">
+                        <div class="jme-contact-v2-info-icon">
 
-    <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
 
-        <path
-            d="M6.6 10.8
-               c1.4 2.8 3.8 5.1 6.6 6.6
-               l2.2-2.2
-               c.3-.3.8-.4 1.2-.2
-               1.3.5 2.6.8 4 .9
-               .5 0 .9.4 .9.9
-               V20
-               c0 .5-.2.9-.6 1.2
-               -1 .9-2.4 1.3-3.7 1.3
-               -8.8 0-16-7.2-16-16
-               0-1.3.4-2.7 1.3-3.7
-               .3-.4.7-.6 1.2-.6
-               h3.2
-               c.5 0 .9.4.9.9
-               .1 1.4.4 2.7.9 4
-               .1.4 0 .9-.3 1.2
-               z"
-        ></path>
+                                <path d="M6.6 10.8
+                   c1.4 2.8 3.8 5.1 6.6 6.6
+                   l2.2-2.2
+                   c.3-.3.8-.4 1.2-.2
+                   1.3.5 2.6.8 4 .9
+                   .5 0 .9.4 .9.9
+                   V20
+                   c0 .5-.2.9-.6 1.2
+                   -1 .9-2.4 1.3-3.7 1.3
+                   -8.8 0-16-7.2-16-16
+                   0-1.3.4-2.7 1.3-3.7
+                   .3-.4.7-.6 1.2-.6
+                   h3.2
+                   c.5 0 .9.4.9.9
+                   .1 1.4.4 2.7.9 4
+                   .1.4 0 .9-.3 1.2
+                   z"></path>
 
-    </svg>
+                            </svg>
 
-</div>
+                        </div>
 
 
                         <div class="jme-contact-v2-info-text">
@@ -572,8 +553,8 @@
 
 
         <!-- =====================================================
-                                                                                                         OFFICE LOCATIONS
-                                                                                                    ====================================================== -->
+                                                                                                             OFFICE LOCATIONS
+                                                                                                        ====================================================== -->
         <section class="jme-contact-v2-offices">
 
             <div class="jme-contact-v2-container">
@@ -609,8 +590,8 @@
 
 
                     <!-- =========================================
-                                                                                                                     PRIMARY OFFICE
-                                                                                                                ========================================== -->
+                                                                                                                         PRIMARY OFFICE
+                                                                                                                    ========================================== -->
                     <article class="jme-contact-v2-office-card">
 
                         <div class="jme-contact-v2-office-detail">
@@ -658,8 +639,8 @@
 
 
                     <!-- =========================================
-                                                                                                                     REGISTERED OFFICE
-                                                                                                                ========================================== -->
+                                                                                                                         REGISTERED OFFICE
+                                                                                                                    ========================================== -->
                     <article class="jme-contact-v2-office-card">
 
                         <div class="jme-contact-v2-office-detail">
@@ -714,8 +695,8 @@
 
 
         <!-- =====================================================
-                                                                                                         CONTACT FORM
-                                                                                                    ====================================================== -->
+                                                                                                             CONTACT FORM
+                                                                                                        ====================================================== -->
         <section class="jme-contact-v2-form-section">
 
             <div class="jme-contact-v2-container">

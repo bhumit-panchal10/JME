@@ -16,6 +16,10 @@ class Category extends Model
         'slugname',
         'image',
         'sort_desicription',
+        'meta_title',
+        'meta_description',
+        'head',
+        'body'
     ];
 
     public function services()
